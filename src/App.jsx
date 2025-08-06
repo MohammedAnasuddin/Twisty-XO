@@ -1,13 +1,13 @@
-
+import Layout from "./components/Layout"
 import './App.css'
 
-function App() {
+function App(){
   
 
   return (
-    <>
-      <h1>Bismillah Let's Begin </h1>
-    </>
+    <div className="project-container w-full h-full">
+     <Layout/>
+    </div>
   )
 }
 
