@@ -13,6 +13,7 @@ const Cell = (props)=>{
        
             <p onClick={handleFill} className="flex items-center justify-center font-bold text-8xl ">
                 {symbol !=null ? symbol: ""}
+                
             </p>
             
         
