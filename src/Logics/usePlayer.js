@@ -5,7 +5,7 @@ function usePlayer (Player) {
     const [moves,setMoves] = useState([])
         const [oldestMove,setOldestMove] = useState(null);
     let placedAll = false
-    console.log(Player,moves)
+    // console.log(Player,moves)
 
     if(moves.length >= 3){
         placedAll = true

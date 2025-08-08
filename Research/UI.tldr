@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 587,
-			"y": 341,
-			"lastActivityTimestamp": 1754470061284,
+			"x": 805.5,
+			"y": 218,
+			"lastActivityTimestamp": 1754678541540,
 			"meta": {}
 		},
 		{
@@ -421,12 +421,58 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 59,
-			"y": -35,
-			"z": 1,
+			"x": -137.37664783427496,
+			"y": 82.31826741996232,
+			"z": 0.7303988995873453,
 			"meta": {},
 			"id": "camera:page:UV6dkZAtGaqCRf9rUP-Xi",
 			"typeName": "camera"
+		},
+		{
+			"x": 605,
+			"y": 12,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:jafBmHIITpCzHvmg9Zw6E",
+			"type": "geo",
+			"props": {
+				"w": 382,
+				"h": 254,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "light-blue",
+				"labelColor": "black",
+				"fill": "solid",
+				"size": "m",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Game"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:R2Isld1aH2Vu3lj-KspWI",
+			"index": "a3B2u",
+			"typeName": "shape"
 		},
 		{
 			"x": 471,
@@ -641,6 +687,58 @@
 			"typeName": "camera"
 		},
 		{
+			"x": 69,
+			"y": 96,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:0_jLZiU2HGrFH0vcwa_j8",
+			"type": "geo",
+			"props": {
+				"w": 402,
+				"h": 278,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "black",
+				"labelColor": "black",
+				"fill": "none",
+				"size": "m",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
+			},
+			"parentId": "page:R2Isld1aH2Vu3lj-KspWI",
+			"index": "a1",
+			"typeName": "shape"
+		},
+		{
+			"editingShapeId": "shape:c63tkJ_axpLdfxQSpE5Y4",
+			"croppingShapeId": null,
+			"selectedShapeIds": [
+				"shape:c63tkJ_axpLdfxQSpE5Y4"
+			],
+			"hoveredShapeId": "shape:c63tkJ_axpLdfxQSpE5Y4",
+			"erasingShapeIds": [],
+			"hintingShapeIds": [],
+			"focusedGroupId": null,
+			"meta": {},
+			"id": "instance_page_state:page:R2Isld1aH2Vu3lj-KspWI",
+			"pageId": "page:R2Isld1aH2Vu3lj-KspWI",
+			"typeName": "instance_page_state"
+		},
+		{
 			"x": 494,
 			"y": 203,
 			"rotation": 0,
@@ -828,6 +926,52 @@
 			},
 			"parentId": "page:UV6dkZAtGaqCRf9rUP-Xi",
 			"index": "a82up",
+			"typeName": "shape"
+		},
+		{
+			"x": 670.5,
+			"y": 155,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:c63tkJ_axpLdfxQSpE5Y4",
+			"type": "geo",
+			"props": {
+				"w": 244,
+				"h": 82,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "red",
+				"labelColor": "black",
+				"fill": "solid",
+				"size": "m",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Grid"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:R2Isld1aH2Vu3lj-KspWI",
+			"index": "a4ABW",
 			"typeName": "shape"
 		},
 		{
@@ -1218,6 +1362,14 @@
 			"parentId": "page:UV6dkZAtGaqCRf9rUP-Xi",
 			"index": "aACAT",
 			"typeName": "shape"
+		},
+		{
+			"x": -511.5,
+			"y": 158,
+			"z": 1,
+			"meta": {},
+			"id": "camera:page:R2Isld1aH2Vu3lj-KspWI",
+			"typeName": "camera"
 		},
 		{
 			"meta": {},
@@ -1858,6 +2010,52 @@
 			"typeName": "shape"
 		},
 		{
+			"x": 80,
+			"y": 108,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:aptXHrNXElCKh_rhHbweX",
+			"type": "geo",
+			"props": {
+				"w": 382,
+				"h": 254,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "light-blue",
+				"labelColor": "black",
+				"fill": "solid",
+				"size": "m",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Game"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:R2Isld1aH2Vu3lj-KspWI",
+			"index": "a241O",
+			"typeName": "shape"
+		},
+		{
 			"x": 429,
 			"y": 260,
 			"rotation": 0,
@@ -2258,6 +2456,13 @@
 			"typeName": "shape"
 		},
 		{
+			"meta": {},
+			"id": "page:R2Isld1aH2Vu3lj-KspWI",
+			"name": "Commponents Structure",
+			"index": "a36Fx",
+			"typeName": "page"
+		},
+		{
 			"x": 792,
 			"y": 464,
 			"rotation": 0,
@@ -2531,14 +2736,13 @@
 			"opacityForNextShape": 1,
 			"stylesForNextShape": {
 				"tldraw:geo": "rectangle",
-				"tldraw:dash": "solid",
-				"tldraw:size": "s",
-				"tldraw:fill": "solid"
+				"tldraw:fill": "solid",
+				"tldraw:color": "red"
 			},
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
-				"type": "move",
+				"type": "default",
 				"rotation": 0
 			},
 			"isFocusMode": false,
@@ -2548,7 +2752,7 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1318,
+				"w": 659,
 				"h": 614
 			},
 			"insets": [
@@ -2573,7 +2777,7 @@
 			"meta": {},
 			"duplicateProps": null,
 			"id": "instance:instance",
-			"currentPageId": "page:UV6dkZAtGaqCRf9rUP-Xi",
+			"currentPageId": "page:R2Isld1aH2Vu3lj-KspWI",
 			"typeName": "instance"
 		},
 		{
@@ -3029,9 +3233,7 @@
 		{
 			"editingShapeId": null,
 			"croppingShapeId": null,
-			"selectedShapeIds": [
-				"shape:P9AVL51FBz22z09zOi4tl"
-			],
+			"selectedShapeIds": [],
 			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],

@@ -7,7 +7,6 @@ const Cell = (props)=>{
     
     }
 
-
     
     return (
        

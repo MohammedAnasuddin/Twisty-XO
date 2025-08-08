@@ -1,12 +1,44 @@
-import Layout from "./components/Layout"
-import './App.css'
 
+import Entry from "./components/Entry.jsx";
+import './App.css'
+import Home from "./components/Home"
+import Header from "./components/Header.jsx"
+import Grid from "./components/Grid/Grid.jsx"
+import Game from "./components/Game.jsx"
+
+import { createBrowserRouter, RouterProvider } from 'react-router'
 function App(){
   
+  const projectRouter = createBrowserRouter([
+
+    {
+      path: "/",
+      element: <Home/>,
+      children: [
+        {
+          path: "/",
+          element:<Entry/>
+        },
+         {
+          path: ":mode/:level?",
+          element:<Game/>
+        },
+
+      ]
+    }
+  ])
+
+
+
+
+
+
+
 
   return (
     <div className="project-container w-full h-full">
-     <Layout/>
+    {/* <Header/> */}
+   <RouterProvider router={projectRouter} />
     </div>
   )
 }
