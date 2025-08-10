@@ -7,6 +7,7 @@ import Grid from "./components/Grid/Grid.jsx"
 import Game from "./components/Game.jsx"
 
 import { createBrowserRouter, RouterProvider } from 'react-router'
+import { GameProvider } from "./components/context/GameContext";
 function App(){
   
   const projectRouter = createBrowserRouter([
@@ -21,7 +22,12 @@ function App(){
         },
          {
           path: ":mode/:level?",
-          element:<Game/>
+          element:(
+          <GameProvider>
+          <Game/>
+          </GameProvider>
+
+        )
         },
 
       ]

@@ -11,11 +11,15 @@
     "test": "jest"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.7",
     "@tailwindcss/vite": "^4.1.11",
+    "immer": "^10.1.1",
+    "radix-ui": "^1.4.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.8.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "use-immer": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
