@@ -7,6 +7,7 @@ import checkWinner from '../../Logics/checkWinner'
 const Grid = (props)=>{
     const cells_required = 9;
     const [cell_values, setCellValues]  = useState(Array(cells_required).fill(null))
+    
     const [oldestMove,setOldestMove] = useState(null);
     const [gameOver, setGameOver] = useState(false)
     const xPlayer = usePlayer("X")

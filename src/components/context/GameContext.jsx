@@ -12,14 +12,14 @@ export function GameProvider ({children}){
     gameWinner: null,
     players: [
       {
-        name: "player1",
+        name: "",
         isComputer: null,
         level: null,
         isTossWinner: null,
         symbol: null
       },
       {
-        name: "player2",
+        name: "",
         isComputer: false,
         level: null,
         isTossWinner: null,
@@ -31,11 +31,17 @@ export function GameProvider ({children}){
     function updateGameSetup(keys, value){
 
      setGameSetup( (draft)=>{
-        let current = draft;
-        for(let i =0; i<(keys.length-1);i++){
-            current = current[keys[i]];
+        // let current = draft;
+        if(keys.length ==1){
+          draft[keys[0]] = value;
         }
-        current[keys[keys.length-1]] = value;
+        else{
+          for(let i =0; i<(keys.length-1);i++){
+            draft= draft[keys[i]];
+        }
+        draft[keys[keys.length-1]] = value;
+        }
+        
       }
 
      )

@@ -1,6 +1,6 @@
 import { useState,useEffect, useContext } from "react"
 import Grid from "./Grid/Grid.jsx"
-
+import TossModal from "./Game/TossModal.jsx";
 import { useParams } from "react-router";
 import createPlayersConfig from "../Logics/createPlayersCofing.js";
 import PlayerModal from "./Grid/PlayersModal.jsx";
@@ -23,7 +23,7 @@ const Game = ()=>{
     
 
     // states to proceed
-    const [arePlayersDefined, setPlayersDefined] = useState(false)
+    // const [arePlayersDefined, setPlayersDefined] = useState(false)
     const [isTossPerformed, setTossPerformed] = useState(false)
     
     const [Toss, setToss] = useState(null)
@@ -52,7 +52,10 @@ const Game = ()=>{
 
 
     //Rendering 
-    if(arePlayersDefined == false){
+   
+    if(gameSetup.players[0].name == "" || gameSetup.players[1].name == ""){
+    //Commented to focus on Toss
+    // if(false){
 
 
         return (
@@ -65,15 +68,22 @@ const Game = ()=>{
     )
     }
 
-    if(isTossPerformed == false){
-        return <h1>Decide the symbols</h1>
+    if(gameSetup.tossWinner == null){
+        return(
+            <>
+            <h1 className="text-4xl animate-pulse">Decide the symbols</h1>
+            <TossModal/>
+            </>
+        )
+
     }
 
     return (
         <div className="flex flex-col items-center justify-center w-screen h-screen">
-                <h1>Turn of {currentPlayer}</h1>
+            <h1 className="text-4xl animate-pulse">Time to Play the Game</h1>
+                {/* <h1>Turn of {currentPlayer}</h1> */}
                    
-                     <Grid  player={currentPlayer} changePlayer={changePlayerTo} />
+                     {/* <Grid  player={currentPlayer} changePlayer={changePlayerTo} /> */}
                 
         </div>
     )

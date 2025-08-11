@@ -29,6 +29,11 @@ function App(){
 
         )
         },
+        {
+          path:"/Game",
+          element:<h1 className="text-4xl animate-pulse">Building the Game Stay Tuned...</h1>,
+          errorElement : <h1 className="text-2xl ">Building the Game Stay Tuned...</h1>
+        }
 
       ]
     }
