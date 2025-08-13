@@ -223,7 +223,9 @@ const [gameSetup, setGameSetup] = useState({
   - - Components may break if they expect a property that doesn’t exist yet.
     
     - You need more null/undefined checks everywhere.
-
+    - 
+- Also Keep tehse values in alphabetiical order since devTools shows them in alphabetical order you don't have look for them again and again.
+To do this write your vaues then look theri ordr in devTools and order them in them in the same way.
 ---
 
 ## **Step 4 — Update Function**
@@ -391,6 +393,12 @@ What if there there is atool which would handle cloning and make sure the stae i
 >     // changes to state
 > } )
 > ```
+> > ### What if immer State has an Array and if we add an element ? Will Immer will elce the Array with element or add new element to the Array in its new state?
+> >Immer does not perform a traditional deep "diff" after you make changes. Instead, it uses a Proxy object to track changes as they are made to a draft state. When a new element is added to an array, Immer employs a "copy-on-write" mechanism. It creates a new array with the added element, while the parts of the state that were not changed remain untouched and are structurally shared with the old state. This is highly efficient and avoids recreating the entire data structure 
+
+#### While updating properties of a draft store them in variables
+- This is the most important reason. Inside an Immer recipe, draft is a mutable proxy. Imagine your logic gets more complex. If you accidentally change draft.value before you've finished all the operations for that turn, you could introduce a bug.
+
 
 
 
@@ -422,3 +430,50 @@ What if there there is atool which would handle cloning and make sure the stae i
 - logs helps to get the quantifiable metrics if you don't have real - users
 - Discussing these steps will surely impress the hiring manager.
 -   
+- 
+- 
+
+### Using if in JSX
+Why you "can't use if inside { } in JSX"
+- Inside JSX, {} is for **expressions, not statements*.
+- if is a statement in JavaScript, so this:
+
+```jsx
+{ if (something) { <div>Yes</div> } }
+```
+is invalid.
+
+
+
+##  Components Just Render and Notifies, Let Context, utility functions Handles the Logics
+### The "Render and Notify" Principle
+
+A core principle for clean React architecture is to let components be responsible for two things only:
+
+1.  **Render:** Display UI based on the props and state they receive.
+2.  **Notify:** Tell a parent or a central state manager (like a Context) when a user does something (like a click).
+
+The component itself should **not** contain complex game logic, state updates, or business rules.
+
+### Why This is a Good Idea
+
+*   **Separation of Concerns:** Your UI components are separate from your logic engine  This makes the code drastically easier to understand and debug.
+*   **Reusability:** A "dumb" component that just renders a UI anywhere , If logics added to it,  it cant be re used anywhere else.
+
+*   **Single Source of Truth:** All UI logic lives in one place  If there's a bug in how turns are changed, you know exactly where to look. There's no chance the logic is accidentally duplicated or conflicting in another component.
+*   **Easier to Test:** You can test your logic (the "brain") completely separately from your UI.
+
+### The Flow
+
+Here’s the data flow we are building, which follows this principle:
+
+1.  **State Lives High Up:** `Context` holds the `data` state, and all teh required  information.
+2.  **Data Flows Down:** `Context` passes the `data` state down to the `UI` component.
+3.  **`Components` Renders:** The  component receives the `data` and simply renders the  based on that data. It doesn't know or care about the logic.
+4.  **User Interacts:** The user clicks a `Components`.
+1. 
+1.  **Component Notifies Up:** The `Componnets`'s `onClick` handler calls the `handler` function  in turn calls `Logic Handler of the data state`. It's just passing a message up
+1.  **Logic is Centralized:** `Context` receives the  notification. It then runs all the logic.
+1.  **State Changes, UI Updates:** Because the state in `Context` changed, React automatically re-renders the `Component` with the new board state. The cycle is complete.
+
+By following this, your components become clean, predictable, and focused on their one job: rendering the UI and reporting events.

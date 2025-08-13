@@ -34,7 +34,7 @@ const TossWheel = ({ playerOne , playerTwo , prize}) => {
 
               setMustStartSpinning(false)
                
-                // Decide winner here
+                // Decide winner here. The `turn` will be set later, after symbol selection.
                 if (prize % 2 === 0) {
                 updateGameSetup(["tossWinner"], 0);
                 } else {
