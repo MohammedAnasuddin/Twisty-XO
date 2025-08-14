@@ -12,7 +12,7 @@ const Entry = ()=>{
         <h3 className="  text-4xl">How will you like to play</h3>
         <div className="flex flex-row m-6"> 
 
-        <Link to="/vsComputer/easy">  
+        <Link to="/vsComputer">  
         <button className=" font-semibold bg-blue-600 text-white m-2 p-2 w-content h-4vh rounded-sm "> vs Computer </button>
         </Link>
         <Link to="/vsFriend"> 

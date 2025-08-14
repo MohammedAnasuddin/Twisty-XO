@@ -15,7 +15,6 @@ export function GameProvider ({children}){
         index: 0,
         name: "",
         isComputer: null,
-        level: null,
         isTossWinner: null,
         symbol: null,
         moves: [],
@@ -25,7 +24,6 @@ export function GameProvider ({children}){
         index: 1,
         name: "",
         isComputer: false,
-        level: null,
         isTossWinner: null,
         symbol: null,
         moves: [],
@@ -126,6 +124,15 @@ export function GameProvider ({children}){
         return;
     }
 
+    // Check for a draw (no winner and board is full)
+    if (!draft.board.includes(null)) {
+        draft.gameWinner = 'draw';
+        // Clear animation flags on draw
+        draft.players[currentPlayerIndex].oldestMove = null;
+        draft.players[opponentIndex].oldestMove = null;
+        return;
+    }
+
     // Switch turn
     draft.turn = opponentIndex;
 
@@ -138,6 +145,7 @@ export function GameProvider ({children}){
         // Consistently use an object payload
         const { symbol } = value;
         draft.players[1].symbol = symbol;
+        draft.players[0].isComputer = true; // Mark Player 0 as the computer
         draft.players[0].symbol = symbol === "X" ? "O": "X";
         draft.turn = 1;
         draft.tossWinner =  1;
@@ -153,6 +161,26 @@ export function GameProvider ({children}){
         draft.players[otherPlayerIndex].symbol = otherSymbol;
         // Now, set the turn to start the game
         draft.turn = tossWinnerIndex;
+      }
+      else if (keys === 'RESET_FOR_NEXT_ROUND') {
+        const lastWinnerIndex = draft.gameWinner;
+
+        // Reset the board
+        draft.board = Array(9).fill(null);
+
+        // Reset player moves and oldest move flags
+        draft.players.forEach(player => {
+          player.moves = [];
+          player.oldestMove = null;
+        });
+
+        // If it was a draw, alternate the starting player. Otherwise, the winner starts.
+        const nextTurn = lastWinnerIndex === 'draw' ? 1 - draft.tossWinner : lastWinnerIndex;
+
+        draft.turn = nextTurn;
+        // Set tossWinner for consistency in case the next game is also a draw
+        draft.tossWinner = nextTurn;
+        draft.gameWinner = null; // Reset the game winner to start the new game
       }
       else { // This is the generic setup logic from before
           if(keys.length ==1){

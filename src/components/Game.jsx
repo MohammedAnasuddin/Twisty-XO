@@ -2,58 +2,40 @@ import { useEffect, useContext } from "react"
 import Grid from "./Grid/Grid.jsx"
 import TossModal from "./Game/TossModal.jsx";
 import { useParams } from "react-router";
-import createPlayersConfig from "../Logics/createPlayersCofing.js";
 import PlayerModal from "./Grid/PlayersModal.jsx";
 import { GameContext } from "./context/GameContext";
 import SymbolModal from './Game/SymbolModal.jsx'
+import { getComputerMove } from "../Logics/useComputerLogic.js";
+import WinnerModal from "./Game/WinnerModal.jsx";
 
 const Game = ()=>{
     // const {playersConfigProp} = props;
     const {gameSetup, updateGameSetup} = useContext(GameContext); 
-    const {mode , level} = useParams()
+    const {mode} = useParams()
 
     useEffect(()=> {
         if(gameSetup.mode === null){
             updateGameSetup(["mode"], mode);
         }
-        if(mode === "vsComputer" && gameSetup.level === null){
-            updateGameSetup(["level"], level);
+    }, [mode, gameSetup.mode, updateGameSetup])
+
+    // This effect runs whenever the turn changes.
+    useEffect(() => {
+        // Check if it's a computer game and if it's the computer's turn (player 0)
+        if (gameSetup.mode === 'vsComputer' && gameSetup.turn === 0 && gameSetup.gameWinner === null) {
+            
+            // Add a delay to simulate the computer "thinking"
+            const timer = setTimeout(() => {
+                const computerMove = getComputerMove(gameSetup);
+                if (computerMove !== null) {
+                    updateGameSetup('MAKE_MOVE', { position: computerMove });
+                }
+            }, 750); // 0.75 second delay
+
+            // Cleanup function to clear the timeout if the component unmounts
+            return () => clearTimeout(timer);
         }
-    }, [mode, level, gameSetup.mode, gameSetup.level, updateGameSetup])
-
-    
-
-    
-    
-
-    // // states to proceed
-    // // const [arePlayersDefined, setPlayersDefined] = useState(false)
-    // const [isTossPerformed, setTossPerformed] = useState(false)
-    
-    // const [Toss, setToss] = useState(null)
-    // const [currentPlayer, setCurrentPlayer] = useState(Toss)
-   
-    // // console.log("Received Mode: ",mode, " Level- ", level)
-    // const playersConfig = createPlayersConfig(mode,level)
-    // // console.log("Players of the game: ",playersConfig);
-    
-    // const Symbols = ["O","X"]  
-    // useEffect(()=>{
-    //     handleToss()
-    // },[])
-    
-    // const changePlayerTo=(new_player)=>{
-    //     setCurrentPlayer(new_player)
-    // }
-
-    // const handleToss = ()=>{
-    //     let winner = Math.floor(Math.random()*2);
-    //     // console.log("Toss: ", winner )
-    //     setToss(playersConfig[winner])  
-    //     setCurrentPlayer(playersConfig[winner])  
-    // }
-
-
+    }, [gameSetup.turn, gameSetup.mode, gameSetup.gameWinner, gameSetup, updateGameSetup]);
 
     //Rendering 
    
@@ -90,6 +72,11 @@ const Game = ()=>{
         if (gameSetup.mode === 'vsComputer') {
             return <SymbolModal />;
         }
+    }
+
+    // If the game is over (winner or draw), show the results modal.
+    if (gameSetup.gameWinner !== null) {
+        return <WinnerModal />;
     }
 
     // Step 4: All setup is complete. Render the game grid.

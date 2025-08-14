@@ -21,7 +21,7 @@ function App(){
           element:<Entry/>
         },
          {
-          path: ":mode/:level?",
+          path: ":mode",
           element:(
           <GameProvider>
           <Game/>

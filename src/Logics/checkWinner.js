@@ -10,10 +10,10 @@ function checkWinner(board) {
     for (let line of lines) {
         const [a, b, c] = line;
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            return true;
+            return board[a]; // Return the winning symbol ('X' or 'O')
         }
     }
-    return false;
+    return null; // No winner
 }
 
 export default checkWinner;
