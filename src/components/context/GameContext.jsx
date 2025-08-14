@@ -41,46 +41,99 @@ export function GameProvider ({children}){
 
      setGameSetup( (draft)=>{
        if(keys === 'MAKE_MOVE'){
-        const { position } = value;
-        const currentPlayerIndex = draft.turn;
+        // const { position } = value;
+        // const currentPlayerIndex = draft.turn;
+        // const currentPlayer = draft.players[currentPlayerIndex];
+        // const moves = currentPlayer.moves;
 
-        // Guard: If cell is filled or game is over, do nothing.
-        if(draft.board[position] !== null || draft.gameWinner !== null){
-          return;
-        }
+        // // Guard: If cell is filled or game is over, do nothing.
+        // if(draft.board[position] !== null || draft.gameWinner !== null){
+        //   return alert(`${currentPlayer.name} has won the Game`);
+        // }
 
-        const currentPlayer = draft.players[currentPlayerIndex];
 
-        // --- "Twisty" Logic Implementation ---
+        // // --- "Twisty" Logic Implementation ---
 
-        // 1. Clear any "oldest move" flags from the previous turn.
+        // // 1. Clear any "oldest move" flags from the previous turn.
        
 
  
-        if (currentPlayer.moves.length >= 3) {
-          const oldestMovePosition = currentPlayer.moves[currentPlayer.moves.length - 3];
-          draft.board[oldestMovePosition] = null;
-          currentPlayer.oldestMove = currentPlayer.moves[currentPlayer.moves.length - 3];
-        }
+        // if (currentPlayer.moves.length >= 3) {
+        //   draft.board[currentPlayer.oldestMove] = null;
+        // }
+        
+        // if(currentPlayer.moves.length <= 3){
+        //   currentPlayer.oldestMove = moves[0];
+        // }
+        
 
-        // 3. Add the new move to the player's history and the board.
-        currentPlayer.moves.push(position);
-        draft.board[position] = currentPlayer.symbol;
+        // // 3. Add the new move to the player's history and the board.
+        // currentPlayer.moves.push(position);
+        // draft.board[position] = currentPlayer.symbol;
 
         
 
-        // Check for a winner after the move
-        if (checkWinner(draft.board)) {
-            draft.gameWinner = currentPlayerIndex;
-            // On win, clear any pending animation
-            draft.players[currentPlayerIndex].oldestMove = null;
-            return; // Game over, no need to change turn
-        }
+        // // Check for a winner after the move
+        // if (checkWinner(draft.board)) {
+        //     draft.gameWinner = currentPlayerIndex;
+        //     // On win, clear any pending animation
+        //     draft.players[currentPlayerIndex].oldestMove = null;
+        //     return; // Game over, no need to change turn
+        // }
 
-        // If no winner, switch to the other player
-        draft.turn = currentPlayerIndex === 0 ? 1 : 0;
+        // // If no winner, switch to the other player
+        // draft.turn = currentPlayerIndex === 0 ? 1 : 0;
+
+
+       
+    const { position } = value;
+    const currentPlayerIndex = draft.turn;
+    const currentPlayer = draft.players[currentPlayerIndex];
+    const opponentIndex = currentPlayerIndex === 0 ? 1 : 0;
+    const opponent = draft.players[opponentIndex];
+
+    // Prevent move if cell is filled or game is over
+    if (draft.board[position] !== null || draft.gameWinner !== null) {
+        return;
+    }
+
+    // Remove oldest move from board if player already has 3 moves
+    if (currentPlayer.moves.length >= 3) {
+        draft.board[currentPlayer.oldestMove] = null;
+    }
+
+    // Add the move
+    currentPlayer.moves.push(position);
+    draft.board[position] = currentPlayer.symbol;
+
+    // Update oldestMove for BOTH players
+    if (currentPlayer.moves.length >= 3) {
+        currentPlayer.oldestMove = currentPlayer.moves[currentPlayer.moves.length - 3];
+    } else {
+        currentPlayer.oldestMove = currentPlayer.moves[0] ?? null;
+    }
+
+    if (opponent.moves.length >= 3) {
+        opponent.oldestMove = opponent.moves[opponent.moves.length - 3];
+    } else {
+        opponent.oldestMove = opponent.moves[0] ?? null;
+    }
+
+    // Check winner
+    if (checkWinner(draft.board)) {
+        draft.gameWinner = currentPlayerIndex;
+        draft.players[currentPlayerIndex].oldestMove = null;
+        return;
+    }
+
+    // Switch turn
+    draft.turn = opponentIndex;
+
 
       } 
+
+
+
       else if(keys==="VS_COMPUTER"){
         // Consistently use an object payload
         const { symbol } = value;
