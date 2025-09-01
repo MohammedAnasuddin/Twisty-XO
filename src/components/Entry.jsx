@@ -6,6 +6,10 @@ const Entry = ()=>{
     
 
     return (
+        
+    // <div id="page_wrapper" className="bg-red-300 container mx-auto px-4flex flex-col gap-6 ">
+
+    // </div>
    
         <div className="  flex items-center flex-col justify-center">
         <h1 className="font-semibold  text-7xl">Welcome to Twisty-XO </h1>
