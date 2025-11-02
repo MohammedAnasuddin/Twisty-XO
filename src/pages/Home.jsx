@@ -1,11 +1,17 @@
 const Home = ()=>{
 
-    return 
+    return (
     
-    <div className="grid">
-
-
+    <div className="w-100  h-100 flex">
+        <div className="level-1">
+            Navbar Component
+        </div>
+        <div className="level-1">
+            Game Body
+        </div>
     </div>
+
+    )
 }
 
-export Home;
+export default Home;

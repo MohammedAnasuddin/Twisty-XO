@@ -5,9 +5,9 @@ const Home = ()=>{
     
 
     return(
-        <div className="mx-4 grid grid-cols-4 gap-4 md:grid-cols-8 lg:grid-cols-12">
-            <Header/>
-            <Outlet/>
+        <div className="w-full min-h-screen size-grid flex gap-4 flex-col bg-base-100">
+            <Header />
+            <Outlet />
         </div>
 
     )

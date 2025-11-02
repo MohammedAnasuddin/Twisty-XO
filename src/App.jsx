@@ -14,12 +14,12 @@ function App(){
 
     {
       path: "/",
-      element: <Home/>,
+      element: <Entry/>,
       children: [
-        {
-          path: "/",
-          element:<Entry/>
-        },
+        // {
+        //   path: "/",
+        //   element:<Entry/>
+        // },
          {
           path: ":mode",
           element:(
@@ -47,7 +47,8 @@ function App(){
 
 
   return (
-    <div className="project-container w-full h-full">
+  
+    <div className="project-container min-h-screen w-full bg-base-100">
     {/* <Header/> */}
    <RouterProvider router={projectRouter} />
     </div>
