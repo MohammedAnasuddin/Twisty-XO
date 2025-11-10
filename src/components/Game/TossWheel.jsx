@@ -1,5 +1,5 @@
 import React, { useState, useEffect , useContext} from "react";
-import { Wheel } from "react-custom-roulette";
+
 import { GameContext } from '../context/GameContext.jsx'
 
 const TossWheel = ({ playerOne , playerTwo , prize}) => {
@@ -25,25 +25,6 @@ const TossWheel = ({ playerOne , playerTwo , prize}) => {
 
   return (
     <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
-      {data.length > 0 && (
-        <Wheel
-          mustStartSpinning={mustStartSpinning}
-          prizeNumber={prize}
-          data={data}
-          onStopSpinning={() => {
-
-              setMustStartSpinning(false)
-               
-                // Decide winner here. The `turn` will be set later, after symbol selection.
-                if (prize % 2 === 0) {
-                updateGameSetup(["tossWinner"], 0);
-                } else {
-                updateGameSetup(["tossWinner"], 1);
-    }
-          }
-        }
-        />
-      )}
     </div>
   );
 };

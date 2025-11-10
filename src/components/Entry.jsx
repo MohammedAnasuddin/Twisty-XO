@@ -1,6 +1,7 @@
 import {useState} from "react"
 import { Link } from "react-router"
 import { GameProvider } from "./context/GameContext"
+import Header from "./Header.jsx"
 import GameBody from "../pages/GameBody.jsx"
 const Entry = ()=>{
     const [playersConfig,setPlayersConfig] = useState([])
@@ -8,11 +9,11 @@ const Entry = ()=>{
 
     return (
         
-      <div className="flex h-screen w-screen flex-col  gap-4">
-        <div className="level-1 h-1/6 w-full bg-red-500/50">
-            Navbar Component
+      <div className="flex h-screen w-screen  flex-col gap-8">
+        <div className="l1 h-1/16 w-full ">
+          
         </div>
-      <GameBody/>
+         <GameBody/>
     </div>
 
 

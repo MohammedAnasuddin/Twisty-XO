@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  margin: 0; /* Remove default browser margins */
+
   min-height: 100vh; /* Make body AT LEAST the height of the screen */
   width: 100%; /* Make body take full width of the html element */
   overflow-x: hidden; /* Safety net: never allow horizontal scrollbars on the body */
@@ -47,10 +47,48 @@ body {
     linear-gradient(to right, rgba(75, 85, 99, 0.6) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(75, 85, 99, 0.6) 1px, transparent 1px);
   background-size:
-    calc(100% / 12) 100%,
-    100% calc(100% / 6);
+    calc(100% / 16) 100%,
+    100% calc(100% / 16);
   background-position:
     -1px -1px,
     -1px -1px;
 }
 
+
+
+    [class^="l"] {
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      transition: all 0.2s ease-in-out;
+    }
+
+   
+    .l1 {
+      background-color: hsla(195, 80%, 65%, 0.3);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    }
+
+   
+    .l2 {
+      background-color: hsla(170, 70%, 55%, 0.35);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    }
+
+ 
+     .l3 {
+      background-color: hsla(140, 60%, 55%, 0.4);
+    }
+
+    /*
+    .l4 {
+      background-color: hsla(210, 80%, 70%, 0.5);
+    }
+
+    .l5 {
+      background-color: hsla(260, 70%, 75%, 0.6);
+    } */
+
+    /* Hover for debugging */
+    [class^="l"]:hover {
+      outline: 2px dashed rgba(0, 0, 0, 0.6);
+      outline-offset: 2px;
+    }

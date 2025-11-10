@@ -1,10 +1,13 @@
-
+import ModeSelect from "../ModeSelect"
+import GridArea from "../GridArea"
+import GameStatus from "../GameStatus"
 const PlayArea = ()=>{
     return (
-        <div className="level-2 h-full w-full lg:w-6/12  bg-green-800/75 size-grid flex flex-col">Play Area
-        <div className="level-3 bg-yellow-600/75 h-1/6 border-2 border-yellow-900">Mode Choice</div>
-        <div className="level-3 bg-yellow-600/75 h-4/6">Grid</div>
-        <div className="level-3 bg-yellow-600/75 h-1/6">Status</div>
+        <div className="l2 h-full w-full lg:w-8/16  flex flex-col gap-y-4 p-4">
+  
+        <ModeSelect/> 
+        <GridArea/>
+        <GameStatus/>
 
         
         </div>
