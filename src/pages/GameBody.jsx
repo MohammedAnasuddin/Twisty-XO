@@ -2,7 +2,7 @@ import GameInfo from "../components/Containers/GameInfo.jsx"
 import PlayArea from "../components/Containers/PlayArea.jsx";
  const GameBody = ()=>{
     return (
-        <div className="l1 h-15/16    w-full flex flex-col md:flex-row gap-8 p-4">
+        <div className="flex flex-col w-full gap-10 p-4 l1 base-100 h-15/16 md:flex-row">
               <GameInfo/>
             <PlayArea/>
         </div>

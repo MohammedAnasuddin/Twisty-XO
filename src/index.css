@@ -1,11 +1,102 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
+@import "@fontsource/kavoon";
+@import "@fontsource/bungee-shade";
+@import '@fontsource-variable/oxanium';
+@import "@fontsource/bungee";
+@import "@fontsource/bungee-hairline";
 
 
- @plugin "daisyui" {
 
-   themes: lofi --default, black --prefersdark;
 
- }
+
+
+@theme{
+  --font-kavoon: 'kavoon', sans-serif;
+  --font-bungee3d: 'bungee shade', sans-serif;
+  --font-bungee: 'bungee', sans-serif;
+  --font-bungee-thin: 'bungee hairline', sans-serif;
+  --font-ox: 'Oxanium Variable', sans-serif;
+}
+
+
+
+@plugin "daisyui/theme" {
+  name: "lMode";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98% 0 0);
+  --color-base-200: oklch(96% 0.001 286.375);
+  --color-base-300: oklch(92% 0.004 286.32);
+  --color-base-content: oklch(21% 0.006 285.885);
+  --color-primary: oklch(0% 0 0);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(84% 0.238 128.85);
+  --color-secondary-content: oklch(27% 0.072 132.109);
+  --color-accent: oklch(84% 0.238 128.85);
+  --color-accent-content: oklch(27% 0.072 132.109);
+  --color-neutral: oklch(21% 0.006 285.885);
+  --color-neutral-content: oklch(98% 0 0);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-info-content: oklch(29% 0.066 243.157);
+  --color-success: oklch(79% 0.209 151.711);
+  --color-success-content: oklch(26% 0.065 152.934);
+  --color-warning: oklch(85% 0.199 91.936);
+  --color-warning-content: oklch(28% 0.066 53.813);
+  --color-error: oklch(71% 0.194 13.428);
+  --color-error-content: oklch(27% 0.105 12.094);
+  --radius-selector: 0.25rem;
+  --radius-field: 2rem;
+  --radius-box: 0rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+
+
+@plugin "daisyui/theme" {
+  name: "dMode";
+  default: false;
+  prefersdark: true;
+  color-scheme: "dark";
+  --color-base-100: oklch(14% 0 0);
+  --color-base-200: oklch(20% 0 0);
+  --color-base-300: oklch(26% 0 0);
+  --color-base-content: oklch(97% 0 0);
+  --color-primary: oklch(67% 0.182 276.935);
+  --color-primary-content: oklch(25% 0.09 281.288);
+  --color-secondary: oklch(71% 0.203 305.504);
+  --color-secondary-content: oklch(29% 0.149 302.717);
+  --color-accent: oklch(79% 0.209 151.711);
+  --color-accent-content: oklch(26% 0.065 152.934);
+  --color-neutral: oklch(20% 0 0);
+  --color-neutral-content: oklch(98% 0 0);
+  --color-info: oklch(62% 0.214 259.815);
+  --color-info-content: oklch(97% 0.014 254.604);
+  --color-success: oklch(72% 0.219 149.579);
+  --color-success-content: oklch(98% 0.018 155.826);
+  --color-warning: oklch(76% 0.188 70.08);
+  --color-warning-content: oklch(98% 0.022 95.277);
+  --color-error: oklch(64% 0.246 16.439);
+  --color-error-content: oklch(96% 0.015 12.422);
+  --radius-selector: 0.5rem;
+  --radius-field: 2rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+ 
+
+
 
 body * {
  @apply transition-colors duration-400;
@@ -54,7 +145,7 @@ body {
     -1px -1px;
 }
 
-
+/*
 
     [class^="l"] {
       border: 1px solid rgba(0, 0, 0, 0.3);
@@ -78,7 +169,7 @@ body {
       background-color: hsla(140, 60%, 55%, 0.4);
     }
 
-    /*
+    
     .l4 {
       background-color: hsla(210, 80%, 70%, 0.5);
     }
@@ -88,7 +179,7 @@ body {
     } */
 
     /* Hover for debugging */
-    [class^="l"]:hover {
+    /* [class^="l"]:hover {
       outline: 2px dashed rgba(0, 0, 0, 0.6);
       outline-offset: 2px;
-    }
+    } */

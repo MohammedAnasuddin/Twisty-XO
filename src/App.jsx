@@ -6,6 +6,7 @@ import Header from "./components/Header.jsx"
 import Grid from "./components/Grid/Grid.jsx"
 import Game from "./components/Game.jsx"
 
+
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import { GameProvider } from "./components/context/GameContext";
 function App(){
@@ -48,7 +49,7 @@ function App(){
 
   return (
   
-    <div className="project-container min-h-screen w-full bg-base-100">
+    <div className="w-full min-h-screen project-container bg-base-100">
     {/* <Header/> */}
    <RouterProvider router={projectRouter} />
     </div>

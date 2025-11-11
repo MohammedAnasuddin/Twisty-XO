@@ -1,7 +1,7 @@
 const ModeSelect = ()=>{
 
     return (
-        <div className="l3 h-2/16 w-full ">
+        <div className="w-full l3 bg-base-300 h-2/16 ">
             
         </div>
     )
