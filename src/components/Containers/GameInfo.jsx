@@ -1,9 +1,9 @@
 const GameInfo = ()=>{
     return (
-        <div className=" bg-base-200 l2 col-start-1 col-span-full md:col-span-8  row-start-1 row-span-4 md:row-span-full  ">
+        <div className=" p-4 sm:p-8 bg-base-200 l2 col-start-1 col-span-full lg:col-span-8  row-start-1 row-span-2 md:row-end-1 lg:row-span-full  ">
 
-             {/* <p className=" text-6xl lg:text-8xl text-base-content font-bungee3d">Win or Witness Other's Win <p className="inline text-red-700">NO DRAW</p></p> 
-             <p className="mt-6 text-2xl lg:text-4xl font-ox">Your <p className="inline animate-pulse">Oldest</p> Move will be removed from 4th Move Onwards</p>  */}
+             {/* <p className="text-xl sm:text-2xl md:text-5xl font-bungee3d">Win or Witness Other's Win <p className="inline sm:block md:inline text-red-700 ">NO DRAW</p></p> 
+             <p className="text-sm sm:text-base md:text-lg my-4 sm:my-2 font-ox">Your <p className="inline animate-pulse">Oldest</p> Move will be removed from 4th Move Onwards</p>  */}
             </div>
        
     )

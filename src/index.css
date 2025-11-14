@@ -181,7 +181,7 @@ body {
 
 
 
-    /* [class^="l"] {
+     [class^="l"] {
       border: 1px solid rgba(0, 0, 0, 0.3);
       transition: all 0.2s ease-in-out;
     }
@@ -210,7 +210,7 @@ body {
 
     .l5 {
       background-color: hsla(260, 70%, 75%, 0.6);
-    }  */
+    }  
 
     /* Hover for debugging */
     /* [class^="l"]:hover {
