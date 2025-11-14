@@ -10,7 +10,7 @@ const Entry = ()=>{
     return (
         
       <div className=" grow-16 w-screen h-screen bg-base-100 md:overflow-y-hidden">
-        <div className="w-full l1 row-span-1 col-span-16">
+        <div className="bg-base-200 w-full l1 row-span-1 col-span-16">
           
         </div>
          <GameBody/>
