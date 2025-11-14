@@ -9,8 +9,8 @@ const Entry = ()=>{
 
     return (
         
-      <div className="flex flex-col w-screen h-screen gap-8 base-300 ">
-        <div className="w-full l1 h-1/16 ">
+      <div className=" grow-16 w-screen h-screen bg-base-100 md:overflow-y-hidden">
+        <div className="w-full l1 row-span-1 col-span-16">
           
         </div>
          <GameBody/>

@@ -145,7 +145,7 @@ body {
     -1px -1px;
 }
 
-/*
+
 
     [class^="l"] {
       border: 1px solid rgba(0, 0, 0, 0.3);
@@ -176,10 +176,20 @@ body {
 
     .l5 {
       background-color: hsla(260, 70%, 75%, 0.6);
-    } */
+    } 
 
     /* Hover for debugging */
     /* [class^="l"]:hover {
       outline: 2px dashed rgba(0, 0, 0, 0.6);
       outline-offset: 2px;
     } */
+
+
+@layer utilities {
+  .grow-16 {
+    @apply grid gap-1.5;
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+    grid-auto-rows: minmax(4rem, auto);
+  }
+}
+
