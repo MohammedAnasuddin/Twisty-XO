@@ -1,4 +1,4 @@
-
+import 'remixicon/fonts/remixicon.css'
 import Entry from "./components/Entry.jsx";
 import './App.css'
 import Home from "./components/Home"
