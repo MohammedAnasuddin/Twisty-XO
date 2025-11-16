@@ -1,6 +1,6 @@
 const ModeSelect = () => {
   return (
-    <div className="col-span-full bg-base-300   p-4 sm:p-6 row-span-2 l3 md:top rounded-md ">
+    <div className="col-span-full bg-base-300   p-4 sm:p-6 row-span-1 md:row-span-2 l3 md:top rounded-md ">
       <p className="text-sm sm:text-base md:text-2xl lg:text-3xl 2xl:text-4xl text-center   font-ox">
         Choose Game Mode
       </p>
