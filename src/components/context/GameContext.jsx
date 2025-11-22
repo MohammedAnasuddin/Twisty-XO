@@ -9,6 +9,10 @@ export function GameProvider({ children }) {
     board: Array(9).fill(null),
     gameWinner: null,
     mode: null,
+    winningCells: [],
+    winningSymbol: null,
+    winningColor: null,
+
     players: [
       {
         index: 0,
@@ -134,18 +138,16 @@ export function GameProvider({ children }) {
         }
 
         // Check winner
-        if (checkWinner(draft.board)) {
+        const win = checkWinner(draft.board);
+        if (win) {
           draft.gameWinner = currentPlayerIndex;
-          draft.players[currentPlayerIndex].oldestMove = null;
-          return;
-        }
+          draft.winningCells = win.cells;
+          draft.winningSymbol = win.symbol; // 'X' or 'O' (helpful)
+          draft.winningColor =
+            win.symbol === "X"
+              ? "var(--color-xSymbol)"
+              : "var(--color-oSymbol)";
 
-        // Check for a draw (no winner and board is full)
-        if (!draft.board.includes(null)) {
-          draft.gameWinner = "draw";
-          // Clear animation flags on draw
-          draft.players[currentPlayerIndex].oldestMove = null;
-          draft.players[opponentIndex].oldestMove = null;
           return;
         }
 
@@ -162,6 +164,11 @@ export function GameProvider({ children }) {
           player.moves = [];
           player.oldestMove = null;
         });
+
+        // Reset win state
+        draft.winningCells = [];
+        draft.winningSymbol = null;
+        draft.winningColor = null;
 
         // If it was a draw, alternate the starting player. Otherwise, the winner starts.
         // We need a reliable way to alternate, let's base it on the last starting player.

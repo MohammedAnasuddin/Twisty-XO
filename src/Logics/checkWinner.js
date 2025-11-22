@@ -1,19 +1,25 @@
 function checkWinner(board) {
-    const lines = [
-        // Rows
-        [0,1,2], [3,4,5], [6,7,8],
-        // Columns
-        [0,3,6], [1,4,7], [2,5,8],
-        // Diagonals
-        [0,4,8], [2,4,6]
-    ];
-    for (let line of lines) {
-        const [a, b, c] = line;
-        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            return board[a]; // Return the winning symbol ('X' or 'O')
-        }
+  const lines = [
+    // Rows
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    // Columns
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    // Diagonals
+    [0, 4, 8], [2, 4, 6],
+  ];
+
+  for (let line of lines) {
+    const [a, b, c] = line;
+
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return {
+        symbol: board[a], // 'X' or 'O'
+        cells: line,      // e.g. [0, 4, 8]
+      };
     }
-    return null; // No winner
+  }
+
+  return null;
 }
 
 export default checkWinner;

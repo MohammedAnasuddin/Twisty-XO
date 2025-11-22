@@ -1,26 +1,110 @@
 @import "tailwindcss";
-@plugin "daisyui";
 
 @import "@fontsource/kavoon";
 @import "@fontsource/bungee-shade";
-@import '@fontsource-variable/oxanium';
+@import "@fontsource-variable/oxanium";
 @import "@fontsource/bungee";
 @import "@fontsource/bungee-hairline";
 
+/* -----------------------------
+   Custom animation variables
+   Must be declared BEFORE DaisyUI theme blocks
+   ----------------------------- */
+@theme {
+  /* Fonts */
+  --font-kavoon: "kavoon", sans-serif;
+  --font-bungee3d: "bungee shade", sans-serif;
+  --font-bungee: "bungee", sans-serif;
+  --font-bungee-thin: "bungee hairline", sans-serif;
+  --font-ox: "Oxanium Variable", sans-serif;
 
+  /* Shake */
+  @keyframes shakeHorizontal {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70% {
+      transform: translateX(-3px);
+    }
+    20%,
+    40%,
+    60% {
+      transform: translateX(3px);
+    }
+    80% {
+      transform: translateX(2px);
+    }
+    90% {
+      transform: translateX(-2px);
+    }
+  }
+  --animate-shake: shakeHorizontal 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 
+  /* Pulsate (oldest move) */
+  @keyframes pulsate {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.08);
+    }
+  }
+  --animate-pulsate: pulsate 0.6s ease-in-out infinite;
 
+  /* Symbol pop-in */
+  @keyframes symbolPop {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  --animate-symbol-pop: symbolPop 350ms ease-out both;
 
+  /* Sweep glow intro (uses --win-color) */
+  @keyframes sweepGlow {
+    0% {
+      background-color: var(--win-color);
+      box-shadow: 0 0 0px var(--win-color);
+    }
+    50% {
+      background-color: oklch(from var(--win-color) l c h / 0.25);
+      box-shadow: 0 0 20px var(--win-color);
+    }
+    100% {
+      background-color: oklch(from var(--win-color) l c h / 0.15);
+      box-shadow: 0 0 5px var(--win-color);
+    }
+  }
+  --animate-sweep-glow: sweepGlow 900ms ease-out forwards;
 
-@theme{
-  --font-kavoon: 'kavoon', sans-serif;
-  --font-bungee3d: 'bungee shade', sans-serif;
-  --font-bungee: 'bungee', sans-serif;
-  --font-bungee-thin: 'bungee hairline', sans-serif;
-  --font-ox: 'Oxanium Variable', sans-serif;
+  /* Persistent breathing glow */
+  @keyframes steadyGlow {
+    0% {
+      box-shadow: 0 0 6px var(--win-color);
+    }
+    50% {
+      box-shadow: 0 0 18px var(--win-color);
+    }
+    100% {
+      box-shadow: 0 0 6px var(--win-color);
+    }
+  }
+  --animate-steady-glow: steadyGlow 2s ease-in-out infinite;
 }
 
-
+@plugin "daisyui";
 
 @plugin "daisyui/theme" {
   name: "lMode";
@@ -29,13 +113,13 @@
   color-scheme: "light";
 
   /* Brighter, cleaner neutrals */
-  --color-base-100: oklch(99% 0 0);       /* background */
-  --color-base-200: oklch(96% 0.01 286);  
-  --color-base-300: oklch(92% 0.015 286); 
+  --color-base-100: oklch(99% 0 0); /* background */
+  --color-base-200: oklch(96% 0.01 286);
+  --color-base-300: oklch(92% 0.015 286);
   --color-base-content: oklch(20% 0.01 285); /* main text */
 
   /* Modern blue-violet primary (matched to dark mode) */
-  --color-primary: oklch(55% 0.20 276.9);
+  --color-primary: oklch(55% 0.2 276.9);
   --color-primary-content: oklch(98% 0.02 285);
 
   /* Secondary with slightly warmer vibe */
@@ -51,7 +135,7 @@
   --color-neutral-content: oklch(98% 0 0);
 
   /* Functional colors tuned for readability */
-  --color-info: oklch(70% 0.20 230);
+  --color-info: oklch(70% 0.2 230);
   --color-info-content: oklch(20% 0.06 243);
 
   --color-success: oklch(74% 0.22 149);
@@ -62,6 +146,9 @@
 
   --color-error: oklch(66% 0.22 16);
   --color-error-content: oklch(22% 0.11 12);
+
+  --color-xSymbol: oklch(55% 0.22 275);
+  --color-oSymbol: oklch(72% 0.18 85);
 
   /* Shape & layout */
   --radius-selector: 0.35rem;
@@ -74,9 +161,6 @@
   --noise: 0;
 }
 
-
-
-
 @plugin "daisyui/theme" {
   name: "dMode";
   default: false;
@@ -84,7 +168,7 @@
   color-scheme: "dark";
 
   /* Deeper, cleaner neutrals */
-  --color-base-100: oklch(12% 0 0);   /* slightly darker */
+  --color-base-100: oklch(12% 0 0); /* slightly darker */
   --color-base-200: oklch(18% 0 0);
   --color-base-300: oklch(26% 0 0);
   --color-base-content: oklch(98% 0 0); /* brighter text */
@@ -116,6 +200,9 @@
   --color-error: oklch(70% 0.28 16.4);
   --color-error-content: oklch(98% 0.02 12.4);
 
+  --color-xSymbol: oklch(78% 0.22 275);
+  --color-oSymbol: oklch(80% 0.2 90);
+
   /* Shape & depth settings */
   --radius-selector: 0.35rem;
   --radius-field: 2rem;
@@ -127,13 +214,8 @@
   --noise: 0;
 }
 
-
- 
-
-
-
 body * {
- @apply transition-colors duration-400;
+  @apply transition-colors duration-400;
 }
 
 /* In src/index.css */
@@ -141,12 +223,13 @@ html {
   box-sizing: border-box; /* Makes width/height calculations more intuitive */
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit; /* All elements inherit this better box model */
 }
 
 body {
-
   min-height: 100vh; /* Make body AT LEAST the height of the screen */
   width: 100%; /* Make body take full width of the html element */
   overflow-x: hidden; /* Safety net: never allow horizontal scrollbars on the body */
@@ -156,31 +239,26 @@ body {
   height: 100%; /* Make React's root div fill its parent (the body) */
 }
 
-
 /* globals.css */
 .size-grid {
   position: relative;
 }
 
 .size-grid::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   z-index: 9999;
   pointer-events: none; /* This is the key to making it non-interactive */
-  background-image:
-    linear-gradient(to right, rgba(75, 85, 99, 0.6) 1px, transparent 1px),
+  background-image: linear-gradient(
+      to right,
+      rgba(75, 85, 99, 0.6) 1px,
+      transparent 1px
+    ),
     linear-gradient(to bottom, rgba(75, 85, 99, 0.6) 1px, transparent 1px);
-  background-size:
-    calc(100% / 16) 100%,
-    100% calc(100% / 16);
-  background-position:
-    -1px -1px,
-    -1px -1px;
+  background-size: calc(100% / 16) 100%, 100% calc(100% / 16);
+  background-position: -1px -1px, -1px -1px;
 }
-
-
-
 
 /*
       [class^="l"] {
@@ -216,14 +294,12 @@ body {
 
 
     */
-    
 
-    /* Hover for debugging */
-    /* [class^="l"]:hover {
+/* Hover for debugging */
+/* [class^="l"]:hover {
       outline: 2px dashed rgba(0, 0, 0, 0.6);
       outline-offset: 2px;
     } */
-
 
 @layer utilities {
   .grow-16 {
@@ -232,4 +308,3 @@ body {
     grid-auto-rows: minmax(4rem, auto);
   }
 }
-

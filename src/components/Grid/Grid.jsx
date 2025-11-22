@@ -5,6 +5,7 @@ import { GameContext } from "../context/GameContext.jsx";
 
 const Grid = () => {
   const { gameSetup, updateGameSetup } = useContext(GameContext);
+  const { winningCells } = gameSetup;
 
   const currentPlayer = gameSetup.turn;
   const moves = gameSetup.players[currentPlayer].moves;
@@ -26,8 +27,7 @@ const Grid = () => {
 
   return (
     <div
-      className="grid grid-cols-3 grid-rows-3  
-                        size-72 sm:size-80 md:size-96"
+      className="grid grid-cols-3 grid-rows-3 size-72 sm:size-80 md:size-96"
     >
       {/* 
             Using responsive size classes:
@@ -57,9 +57,11 @@ const Grid = () => {
         // }
 
         return (
-          <Cell key={i} symbol={symbol} index={i} insertSymbol={addSymbol} isOldest={isOldest} />
+          <Cell key={i} symbol={symbol} index={i} insertSymbol={addSymbol} isOldest={isOldest}    isWinning={winningCells?.includes(i)} />
         );
-      })}
+      }
+      
+      )}
     </div>
   );
 };
