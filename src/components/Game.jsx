@@ -41,7 +41,7 @@ const Game = () => {
 
   // Step 4: All setup is complete. Render the game grid.
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full gap-4">
+    <div className="flex flex-col items-center justify-start  w-full h-full gap-4 m-8">
       {/* <h1 className="text-4xl animate-pulse">
         Turn of {gameSetup.players[gameSetup.turn].name} :{" "}
         {gameSetup.players[gameSetup.turn].symbol}

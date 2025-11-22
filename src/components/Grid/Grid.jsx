@@ -26,7 +26,7 @@ const Grid = () => {
 
   return (
     <div
-      className="grid grid-cols-3 grid-rows-3 border-2 divide-x divide-y border-zinc-900 
+      className="grid grid-cols-3 grid-rows-3  
                         size-72 sm:size-80 md:size-96"
     >
       {/* 
@@ -38,14 +38,16 @@ const Grid = () => {
       {gameSetup.board.map((symbol, i) => {
         // Check if this cell is marked as the "oldest" for either player.
         // const isOldest = i === gameSetup.players[0].oldestMove || i === gameSetup.players[1].oldestMove;
+        let isOldest=false;
+     
 
         if (i == oldestMove && moves.length >= 3) {
-          return (
-            <div key={i} className="animate-pulse">
-              <Cell symbol={symbol} index={i} insertSymbol={addSymbol} />
-            </div>
-          );
+    
+              isOldest=true;
+  
         }
+
+    
         //  if (i == otherOldestMove &&  gameSetup.players[nextTurn].moves.length >= 3 &&  gameSetup.board[otherOldestMove]!=null) {
         //     return (
         //         <div key={i} className="bg-red-500">
@@ -55,7 +57,7 @@ const Grid = () => {
         // }
 
         return (
-          <Cell key={i} symbol={symbol} index={i} insertSymbol={addSymbol} />
+          <Cell key={i} symbol={symbol} index={i} insertSymbol={addSymbol} isOldest={isOldest} />
         );
       })}
     </div>
