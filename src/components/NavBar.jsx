@@ -1,14 +1,18 @@
+import { Link } from "react-router";
 const NavBar = () => {
   return (
-    <div className=" h-full w-full">
-      <div className="navbar h-full p-2 md:p-4 bg-base-100 shadow-sm flex justify-between items-center">
+    <div className="w-full h-full ">
+      <div className="flex items-center justify-between h-full p-2 shadow-sm navbar md:p-4 bg-base-100">
         <div>
-          <a className="btn btn-ghost text-xl md:text-2xl lg:text-3xl font-bungee">
+          <Link
+            to="/"
+            className="text-xl btn btn-ghost md:text-2xl lg:text-3xl font-bungee"
+          >
             Twisty XO
-          </a>
+          </Link>
         </div>
 
-        <div className="icons flex gap-2 sm:gap-4">
+        <div className="flex gap-2 icons sm:gap-4">
           <label className="swap swap-rotate btn btn-ghost ">
             {/* this hidden checkbox controls the state */}
             <input type="checkbox" className="theme-controller" value="lMode" />
@@ -16,7 +20,7 @@ const NavBar = () => {
             {/* sun icon */}
 
             <svg
-              className="swap-off fill-current w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8"
+              className="w-5 h-5 fill-current swap-off md:w-6 md:h-6 lg:w-8 lg:h-8"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -26,7 +30,7 @@ const NavBar = () => {
             {/* moon icon */}
 
             <svg
-              className="swap-on fill-current w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8"
+              className="w-5 h-5 fill-current swap-on md:w-6 md:h-6 lg:w-8 lg:h-8"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >

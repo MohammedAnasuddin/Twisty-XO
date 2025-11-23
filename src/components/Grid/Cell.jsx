@@ -6,7 +6,6 @@ const Cell = ({ symbol, insertSymbol, index, isOldest, isWinning }) => {
   const { gameSetup } = useContext(GameContext);
 
   const [hoverReady, setHoverReady] = useState(true);
-  const [steadyGlow, setSteadyGlow] = useState(false);
   const [shouldPop, setShouldPop] = useState(false);
 
   const isFilled = symbol != null;
@@ -37,14 +36,12 @@ const Cell = ({ symbol, insertSymbol, index, isOldest, isWinning }) => {
       ? { "--win-color": gameSetup.winningColor }
       : {};
 
-  // 🟨 STEADY GLOW AFTER SWEEP
+  // 🟨 STEADY GLOW (AFTER SWEEP)
   useEffect(() => {
     if (isWinning) {
-      setSteadyGlow(false);
-      const t = setTimeout(() => setSteadyGlow(true), 900);
+      const t = setTimeout(() => {}, 900);
       return () => clearTimeout(t);
     }
-    setSteadyGlow(false);
   }, [isWinning]);
 
   return (
@@ -52,33 +49,31 @@ const Cell = ({ symbol, insertSymbol, index, isOldest, isWinning }) => {
       onClick={handleFill}
       style={winStyle}
       className={clsx(
-        "m-2  bg-base-300 flex items-center justify-center font-bold text-5xl md:text-7xl",
+        "m-2 bg-base-300 flex items-center justify-center font-bold text-5xl md:text-7xl select-none",
 
-        // 🥇 WINNING ANIMATION
-        isWinning && "animate-sweep-glow",
-        isWinning && "animate-steady-glow",
+        // 🥇 WINNING ANIMATIONS
+        isWinning && "animate-sweep-glow animate-steady-glow",
 
-        // 🔸 OLDEST MOVE (ONLY IF NOT WINNING)
+        // 🔹 EMPTY CELL HOVER (springy premium UX)
+        !isWinning && !isFilled && "cell-hover-pop",
 
-        // 🔹 SHAKE FOR NORMAL FILLED CELLS
+        // 🔸 SHAKE FOR NORMAL FILLED CELLS
         !isWinning &&
           !isOldest &&
           isFilled &&
           hoverReady &&
-          "hover:animate-shake",
-
-        // ▪ EMPTY HOVER
-        !isWinning &&
-          !isFilled &&
-          "hover:scale-105 hover:shadow-lg transition-transform transition-shadow duration-200 ease-[cubic-bezier(0.22,_1,_0.36,_1)]"
+          "hover:animate-shake"
       )}
     >
       <p
         className={clsx(
           "font-ox",
-          !isWinning && isOldest && "animate-pulsate",
+
           // 🎉 POP-IN ON SYMBOL ADD
           shouldPop && "animate-symbol-pop",
+
+          // 🔸 OLDEST MOVE PULSE (if not winning)
+          !shouldPop && !isWinning && isOldest && "animate-pulsate",
 
           // 🎨 COLORING
           symbol === "X" &&

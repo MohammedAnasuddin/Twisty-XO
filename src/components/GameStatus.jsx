@@ -6,12 +6,15 @@ const GameStatus = () => {
   const { gameSetup, updateGameSetup } = useContext(GameContext);
 
   /** --------------------------------------------------
-   *  ALWAYS highlight only the player whose turn it is
+   *  Determine WHICH SYMBOL should highlight: 'X' or 'O'
    *  -------------------------------------------------- */
-  const highlightPlayer = gameSetup.turn;
+  const currentSymbol = gameSetup.players?.[gameSetup.turn]?.symbol ?? null; // 'X' or 'O'
 
-  const p0 = gameSetup.players?.[0] ?? {};
-  const p1 = gameSetup.players?.[1] ?? {};
+  /** --------------------------------------------------
+   *  Get the actual players by symbol (SAFE for all modes)
+   *  -------------------------------------------------- */
+  const X = gameSetup.players?.find((p) => p.symbol === "X") ?? {};
+  const O = gameSetup.players?.find((p) => p.symbol === "O") ?? {};
 
   /** --------------------------------------------------
    *  Turn change animation
@@ -19,10 +22,11 @@ const GameStatus = () => {
   const [animateTurn, setAnimateTurn] = useState(false);
 
   useEffect(() => {
+    if (!currentSymbol) return;
     setAnimateTurn(true);
     const t = setTimeout(() => setAnimateTurn(false), 250);
     return () => clearTimeout(t);
-  }, [highlightPlayer]);
+  }, [currentSymbol]);
 
   /** --------------------------------------------------
    *  Restart handler
@@ -37,9 +41,9 @@ const GameStatus = () => {
       <div
         className={clsx(
           "px-4 py-2 rounded-xl flex items-center gap-2 font-ox text-lg transition-all",
-          highlightPlayer === 1 ? "bg-base-300" : "bg-base-200/70",
-          highlightPlayer === 1 && "shadow-[0_0_12px_var(--color-xSymbol)]",
-          highlightPlayer === 1 && animateTurn && "scale-105"
+          currentSymbol === "X" ? "bg-base-300" : "bg-base-200/70",
+          currentSymbol === "X" && "shadow-[0_0_12px_var(--color-xSymbol)]",
+          currentSymbol === "X" && animateTurn && "scale-105"
         )}
       >
         <span
@@ -48,7 +52,7 @@ const GameStatus = () => {
         >
           X
         </span>
-        <span className="text-sm opacity-80">{p1.name || "Player X"}</span>
+        <span className="text-sm opacity-80">{X.name || "Player X"}</span>
       </div>
 
       {/* RESTART BUTTON */}
@@ -76,9 +80,9 @@ const GameStatus = () => {
       <div
         className={clsx(
           "px-4 py-2 rounded-xl flex items-center gap-2 font-ox text-lg transition-all",
-          highlightPlayer === 0 ? "bg-base-300" : "bg-base-200/70",
-          highlightPlayer === 0 && "shadow-[0_0_12px_var(--color-oSymbol)]",
-          highlightPlayer === 0 && animateTurn && "scale-105"
+          currentSymbol === "O" ? "bg-base-300" : "bg-base-200/70",
+          currentSymbol === "O" && "shadow-[0_0_12px_var(--color-oSymbol)]",
+          currentSymbol === "O" && animateTurn && "scale-105"
         )}
       >
         <span
@@ -87,7 +91,7 @@ const GameStatus = () => {
         >
           O
         </span>
-        <span className="text-sm opacity-80">{p0.name || "Player O"}</span>
+        <span className="text-sm opacity-80">{O.name || "Player O"}</span>
       </div>
     </div>
   );
