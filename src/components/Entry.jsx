@@ -1,6 +1,6 @@
-import { GameProvider } from "./context/GameContext";
-import GameBody from "../pages/GameBody.jsx";
-import NavBar from "./NavBar.jsx";
+import { GameProvider } from "../entities/game/model/GameContext";
+import GameBody from "../pages/game/ui/GameBody.jsx";
+import NavBar from "../widgets/navbar/ui/NavBar.jsx";
 const Entry = () => {
   return (
     <GameProvider>

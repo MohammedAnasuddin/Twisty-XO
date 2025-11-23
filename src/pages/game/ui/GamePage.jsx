@@ -1,0 +1,86 @@
+import { useEffect, useContext, useState } from "react";
+import Grid from "../../../entities/grid/ui/Grid.jsx";
+import GameStatus from "../../../entities/game/ui/GameStatus.jsx";
+import { GameContext } from "../../../entities/game/model/GameContext.jsx";
+import { getComputerMove } from "../../../features/computer-move/model/useComputerLogic.js";
+import clsx from "clsx";
+
+const Game = () => {
+  const { gameSetup, updateGameSetup } = useContext(GameContext);
+  const [showRestart, setShowRestart] = useState(false);
+
+  // Delay restart button
+  useEffect(() => {
+    if (gameSetup.gameWinner !== null) {
+      setShowRestart(false);
+      const timer = setTimeout(() => setShowRestart(true), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [gameSetup.gameWinner]);
+
+  // Computer AI
+  useEffect(() => {
+    if (
+      gameSetup.mode === "vsComputer" &&
+      gameSetup.turn === 0 &&
+      gameSetup.gameWinner === null
+    ) {
+      const timer = setTimeout(() => {
+        const computerMove = getComputerMove(gameSetup);
+        if (computerMove !== null) {
+          updateGameSetup("MAKE_MOVE", { position: computerMove });
+        }
+      }, 750);
+
+      return () => clearTimeout(timer);
+    }
+  }, [gameSetup.turn, gameSetup.gameWinner]);
+
+  const winnerText =
+    gameSetup.gameWinner === "draw"
+      ? "It's a Draw!"
+      : typeof gameSetup.gameWinner === "number"
+      ? `${gameSetup.players[gameSetup.gameWinner]?.symbol ?? ""} Wins`
+      : "";
+
+  return (
+    <div className="flex flex-col items-center w-full gap-4 mt-6">
+      {/* 🟦 GRID ALWAYS SHOWS */}
+      <Grid />
+
+      {/* 🟩 IF GAME OVER → SHOW WINNER DIALOG */}
+      {gameSetup.gameWinner !== null ? (
+        <div className="flex flex-col items-center gap-4 mt-4">
+          {/* WINNER BANNER (with glow + gradient) */}
+          <div
+            className={clsx(
+              "text-5xl sm:text-6xl font-extrabold font-bungee3d animate-winner-pop text-center tracking-wide",
+              gameSetup.gameWinner === "draw"
+                ? "text-gradient-neutral"
+                : gameSetup.players[gameSetup.gameWinner].symbol === "X"
+                ? "text-gradient-x"
+                : "text-gradient-o"
+            )}
+          >
+            {winnerText}
+          </div>
+
+          {/* Restart Button (delay) */}
+          {showRestart && (
+            <button
+              onClick={() => updateGameSetup("RESET_FOR_NEXT_ROUND")}
+              className="flex items-center gap-2 px-5 py-2 text-base transition-all duration-200 border shadow-lg rounded-xl font-ox bg-white/10 dark:bg-white/5 backdrop-blur-md border-white/20 dark:border-white/10 hover:bg-white/20 dark:hover:bg-white/10 hover:shadow-xl active:scale-95"
+            >
+              Play Again
+            </button>
+          )}
+        </div>
+      ) : (
+        /* 🟦 IF NO WINNER → SHOW GAME STATUS */
+        <GameStatus />
+      )}
+    </div>
+  );
+};
+
+export default Game;
