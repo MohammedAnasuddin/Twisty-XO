@@ -4,12 +4,12 @@ const NavBar = () => {
     <div className="w-full h-full ">
       <div className="flex items-center justify-between h-full p-2 shadow-sm navbar md:p-4 bg-base-100">
         <div>
-          <Link
-            to="/"
-            className="text-xl btn btn-ghost md:text-2xl lg:text-3xl font-bungee"
+          <a
+            className="text-xl transition cursor-pointer btn btn-ghost md:text-2xl lg:text-3xl font-bungee active:scale-95"
+            onClick={() => window.location.reload()}
           >
             Twisty XO
-          </Link>
+          </a>
         </div>
 
         <div className="flex gap-2 icons sm:gap-4">

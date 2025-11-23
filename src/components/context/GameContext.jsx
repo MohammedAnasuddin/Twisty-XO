@@ -43,6 +43,7 @@ export function GameProvider({ children }) {
     "START_GAME",
     "MAKE_MOVE",
     "RESET_FOR_NEXT_ROUND",
+    "RESET_TO_HOME",
   ]);
 
   // A whitelist of state paths that are allowed to be updated by the generic

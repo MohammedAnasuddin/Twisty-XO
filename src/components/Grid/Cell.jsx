@@ -16,8 +16,6 @@ const Cell = ({ symbol, insertSymbol, index, isOldest, isWinning }) => {
       insertSymbol(index);
       setHoverReady(false);
       setTimeout(() => setHoverReady(true), 700);
-    } else {
-      alert("Already filled Try another cell");
     }
   };
 
