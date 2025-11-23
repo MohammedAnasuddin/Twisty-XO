@@ -16,18 +16,14 @@ export function GameProvider({ children }) {
     players: [
       {
         index: 0,
-        name: "",
         isComputer: null,
-        isTossWinner: null,
         symbol: null,
         moves: [],
         oldestMove: null,
       },
       {
         index: 1,
-        name: "",
         isComputer: false,
-        isTossWinner: null,
         symbol: null,
         moves: [],
         oldestMove: null,

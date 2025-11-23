@@ -235,6 +235,8 @@ body {
   min-height: 100%; /* Make React's root div fill its parent (the body) */
 }
 
+
+
 /* globals.css */
 .size-grid {
   position: relative;
