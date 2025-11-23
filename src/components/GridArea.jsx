@@ -2,7 +2,7 @@ import Game from "./Game";
 
 const GridArea = () => {
   return (
-    <div className="col-span-full row-span-full flex flex-col justify-items-start md:justify-center items-center">
+    <div className="flex flex-col items-center col-span-full row-span-full justify-items-start">
       <Game />
     </div>
   );

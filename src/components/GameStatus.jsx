@@ -6,51 +6,34 @@ const GameStatus = () => {
   const { gameSetup, updateGameSetup } = useContext(GameContext);
 
   /** --------------------------------------------------
-   *  TRUE CURRENT PLAYER TO HIGHLIGHT
+   *  ALWAYS highlight only the player whose turn it is
    *  -------------------------------------------------- */
-  let highlightPlayer = null;
-
-  if (typeof gameSetup.gameWinner === "number") {
-    // Highlight winner after game ends
-    highlightPlayer = gameSetup.gameWinner;
-  } else if (gameSetup.gameWinner === "draw") {
-    // Draw → highlight no one
-    highlightPlayer = null;
-  } else if (Number.isInteger(gameSetup.turn)) {
-    // Normal gameplay → highlight current turn
-    highlightPlayer = gameSetup.turn;
-  } else {
-    // Safety fallback
-    highlightPlayer = 0;
-  }
+  const highlightPlayer = gameSetup.turn;
 
   const p0 = gameSetup.players?.[0] ?? {};
   const p1 = gameSetup.players?.[1] ?? {};
 
   /** --------------------------------------------------
-   *  SMALL TURN-CHANGE ANIMATION
+   *  Turn change animation
    *  -------------------------------------------------- */
   const [animateTurn, setAnimateTurn] = useState(false);
 
   useEffect(() => {
-    if (highlightPlayer === null) return; // No animation on draw
     setAnimateTurn(true);
     const t = setTimeout(() => setAnimateTurn(false), 250);
     return () => clearTimeout(t);
   }, [highlightPlayer]);
 
   /** --------------------------------------------------
-   *  HANDLE RESTART
+   *  Restart handler
    *  -------------------------------------------------- */
   const handleRestart = () => {
     updateGameSetup("RESET_FOR_NEXT_ROUND");
   };
 
   return (
-    <div className="flex items-center justify-center gap-6 mt-4">
-      {/* ===========================
-          PLAYER X
-      ============================ */}
+    <div className="grid w-full max-w-sm grid-cols-3 mx-auto mt-4 place-items-center">
+      {/* PLAYER X */}
       <div
         className={clsx(
           "px-4 py-2 rounded-xl flex items-center gap-2 font-ox text-lg transition-all",
@@ -68,14 +51,12 @@ const GameStatus = () => {
         <span className="text-sm opacity-80">{p1.name || "Player X"}</span>
       </div>
 
-      {/* ===========================
-          RESTART BUTTON
-      ============================ */}
+      {/* RESTART BUTTON */}
       <button
         type="button"
         onClick={handleRestart}
         aria-label="Restart game"
-        className="inline-flex items-center gap-2 px-3 py-2 transition-colors duration-150 rounded-full shadow-sm bg-base-200 hover:bg-base-300"
+        className="inline-flex items-center justify-center gap-2 px-3 py-2 transition-colors duration-150 rounded-full shadow-sm bg-base-200 hover:bg-base-300"
       >
         <svg
           width="22"
@@ -89,12 +70,9 @@ const GameStatus = () => {
           <path d="M4 4v5h5" />
           <path d="M5.07 8a8 8 0 1 1 -.82 6" />
         </svg>
-        <span className="text-sm font-medium">Restart</span>
       </button>
 
-      {/* ===========================
-          PLAYER O
-      ============================ */}
+      {/* PLAYER O */}
       <div
         className={clsx(
           "px-4 py-2 rounded-xl flex items-center gap-2 font-ox text-lg transition-all",
