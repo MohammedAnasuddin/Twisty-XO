@@ -52,7 +52,7 @@ const Cell = ({ symbol, insertSymbol, index, isOldest, isWinning }) => {
       onClick={handleFill}
       style={winStyle}
       className={clsx(
-        "m-4 bg-base-300 flex items-center justify-center font-bold text-6xl",
+        "m-2  bg-base-300 flex items-center justify-center font-bold text-5xl md:text-7xl",
 
         // 🥇 WINNING ANIMATION
         isWinning && "animate-sweep-glow",

@@ -1,24 +1,24 @@
 import { useEffect, useContext, useState } from "react";
 import Grid from "./Grid/Grid.jsx";
+import GameStatus from "./GameStatus.jsx";
 import { GameContext } from "./context/GameContext";
 import { getComputerMove } from "../Logics/useComputerLogic.js";
+import clsx from "clsx";
 
 const Game = () => {
   const { gameSetup, updateGameSetup } = useContext(GameContext);
   const [showRestart, setShowRestart] = useState(false);
 
-  // When someone wins, wait 500ms then show restart button
+  // Delay restart button
   useEffect(() => {
     if (gameSetup.gameWinner !== null) {
       setShowRestart(false);
-      const timer = setTimeout(() => {
-        setShowRestart(true);
-      }, 500);
+      const timer = setTimeout(() => setShowRestart(true), 500);
       return () => clearTimeout(timer);
     }
   }, [gameSetup.gameWinner]);
 
-  // Computer move logic
+  // Computer AI
   useEffect(() => {
     if (
       gameSetup.mode === "vsComputer" &&
@@ -31,45 +31,53 @@ const Game = () => {
           updateGameSetup("MAKE_MOVE", { position: computerMove });
         }
       }, 750);
+
       return () => clearTimeout(timer);
     }
-  }, [
-    gameSetup.turn,
-    gameSetup.mode,
-    gameSetup.gameWinner,
-    gameSetup,
-    updateGameSetup,
-  ]);
+  }, [gameSetup.turn, gameSetup.gameWinner]);
 
-  // Winner text logic
-  let winnerText = "";
-
-  if (gameSetup.gameWinner === "draw") {
-    winnerText = "It’s a draw!";
-  } else if (
-    typeof gameSetup.gameWinner === "number" &&
-    gameSetup.players[gameSetup.gameWinner]
-  ) {
-    winnerText = `${gameSetup.players[gameSetup.gameWinner].symbol} wins!`;
-  }
+  const winnerText =
+    gameSetup.gameWinner === "draw"
+      ? "It's a Draw!"
+      : typeof gameSetup.gameWinner === "number"
+      ? `${gameSetup.players[gameSetup.gameWinner]?.symbol ?? ""} Wins`
+      : "";
 
   return (
-    <div className="flex flex-col items-center justify-start w-full h-full gap-6 mt-6">
-      <Grid /> {/* FIRST now */}
-      {/* WINNER BANNER */}
-      {gameSetup.gameWinner !== null && (
-        <div className="text-4xl font-bold animate-symbol-pop text-primary-content">
-          {winnerText}
+    <div className="flex flex-col items-center w-full gap-4 mt-6">
+      {/* 🟦 GRID ALWAYS SHOWS */}
+      <Grid />
+
+      {/* 🟩 IF GAME OVER → SHOW WINNER DIALOG */}
+      {gameSetup.gameWinner !== null ? (
+        <div className="flex flex-col items-center gap-4 mt-4">
+          {/* WINNER BANNER (with glow + gradient) */}
+          <div
+            className={clsx(
+              "text-5xl sm:text-6xl font-extrabold font-ox animate-winner-pop text-center tracking-wide",
+              gameSetup.gameWinner === "draw"
+                ? "text-gradient-neutral"
+                : gameSetup.players[gameSetup.gameWinner].symbol === "X"
+                ? "text-gradient-x"
+                : "text-gradient-o"
+            )}
+          >
+            {winnerText}
+          </div>
+
+          {/* Restart Button (delay) */}
+          {showRestart && (
+            <button
+              className="btn btn-primary animate-symbol-pop"
+              onClick={() => updateGameSetup("RESET_FOR_NEXT_ROUND")}
+            >
+              Restart
+            </button>
+          )}
         </div>
-      )}
-      {/* RESTART BUTTON */}
-      {showRestart && (
-        <button
-          className="btn btn-primary animate-symbol-pop"
-          onClick={() => updateGameSetup("RESET_FOR_NEXT_ROUND")}
-        >
-          Restart
-        </button>
+      ) : (
+        /* 🟦 IF NO WINNER → SHOW GAME STATUS */
+        <GameStatus />
       )}
     </div>
   );

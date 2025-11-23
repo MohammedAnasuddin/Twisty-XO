@@ -6,10 +6,6 @@
 @import "@fontsource/bungee";
 @import "@fontsource/bungee-hairline";
 
-/* -----------------------------
-   Custom animation variables
-   Must be declared BEFORE DaisyUI theme blocks
-   ----------------------------- */
 @theme {
   /* Fonts */
   --font-kavoon: "kavoon", sans-serif;
@@ -249,7 +245,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: 9999;
-  pointer-events: none; /* This is the key to making it non-interactive */
+  pointer-events: none;
   background-image: linear-gradient(
       to right,
       rgba(75, 85, 99, 0.6) 1px,
@@ -306,5 +302,53 @@ body {
     @apply grid gap-1.5;
     grid-template-columns: repeat(16, minmax(0, 1fr));
     grid-auto-rows: minmax(4rem, auto);
+  }
+}
+
+@layer utilities {
+  .text-gradient-x {
+    background: linear-gradient(
+      90deg,
+      oklch(78% 0.22 275) 0%,
+      oklch(70% 0.22 275) 100%
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 18px oklch(78% 0.22 275 / 0.7);
+  }
+
+  .text-gradient-o {
+    background: linear-gradient(
+      90deg,
+      oklch(80% 0.2 90) 0%,
+      oklch(72% 0.18 85) 100%
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 18px oklch(80% 0.2 90 / 0.7);
+  }
+
+  .text-gradient-neutral {
+    background: linear-gradient(90deg, oklch(95% 0 0) 0%, oklch(80% 0 0) 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 18px oklch(100% 0 0 / 0.5);
+  }
+
+  @keyframes winner-pop {
+    0% {
+      transform: scale(0.7);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .animate-winner-pop {
+    animation: winner-pop 350ms cubic-bezier(0.25, 0.8, 0.25, 1) both;
   }
 }
