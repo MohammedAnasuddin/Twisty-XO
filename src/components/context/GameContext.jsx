@@ -159,27 +159,33 @@ export function GameProvider({ children }) {
         // Reset the board
         draft.board = Array(9).fill(null);
 
-        // Reset player moves and oldest move flags
+        // Reset player moves
         draft.players.forEach((player) => {
           player.moves = [];
           player.oldestMove = null;
         });
 
-        // Reset win state
+        // Cleanup winning details
         draft.winningCells = [];
-        draft.winningSymbol = null;
         draft.winningColor = null;
+        draft.winningSymbol = null;
 
-        // If it was a draw, alternate the starting player. Otherwise, the winner starts.
-        // We need a reliable way to alternate, let's base it on the last starting player.
-        const lastStartingPlayer = draft.turn; // This is not quite right, let's simplify
-        const nextTurn =
-          lastWinnerIndex === "draw"
-            ? 1 - draft.players.findIndex((p) => p.name === "Player 1")
-            : lastWinnerIndex;
+        // ★ SAFELY determine next turn
+        let nextTurn;
 
-        draft.turn = nextTurn;
-        draft.gameWinner = null; // Reset the game winner to start the new game
+        if (typeof lastWinnerIndex === "number") {
+          // Winner starts next round
+          nextTurn = lastWinnerIndex;
+        } else if (lastWinnerIndex === "draw") {
+          // Alternate after draw
+          nextTurn = draft.turn === 0 ? 1 : 0;
+        } else {
+          // Mid-game restart or weird case → default
+          nextTurn = 0;
+        }
+
+        draft.turn = nextTurn; // ALWAYS safe
+        draft.gameWinner = null;
       } else {
         // --- Generic Update Logic with Security Check ---
         if (isAllowed(keys)) {

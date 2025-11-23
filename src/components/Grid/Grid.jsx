@@ -1,68 +1,67 @@
 import Cell from "./Cell";
-
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { GameContext } from "../context/GameContext.jsx";
 
 const Grid = () => {
   const { gameSetup, updateGameSetup } = useContext(GameContext);
   const { winningCells } = gameSetup;
 
-  const currentPlayer = gameSetup.turn;
-  const moves = gameSetup.players[currentPlayer].moves;
-  const oldestMove = gameSetup.players[currentPlayer].oldestMove;
-  const nextTurn = currentPlayer == 1 ? 0 : 1;
-  const otherOldestMove = gameSetup.players[nextTurn].oldestMove;
+  /** --------------------------------------------------
+   *  SAFE player + moves extraction
+   *  -------------------------------------------------- */
+  const currentPlayer = Number.isInteger(gameSetup.turn) ? gameSetup.turn : 0;
+
+  const playerObj = gameSetup.players?.[currentPlayer];
+  const moves = playerObj?.moves ?? [];
+  const oldestMove = playerObj?.oldestMove ?? null;
+
+  const nextTurn = currentPlayer === 1 ? 0 : 1;
+  // Needed if you ever show other player animations
+  const otherOldestMove = gameSetup.players?.[nextTurn]?.oldestMove ?? null;
+
+  /** --------------------------------------------------
+   *  UPDATE oldestMove when a player exceeds 3 moves
+   *  -------------------------------------------------- */
   useEffect(() => {
-    if (gameSetup.players[currentPlayer].moves.length >= 3) {
+    const p = gameSetup.players?.[currentPlayer];
+    if (!p) return;
+
+    if (p.moves.length >= 3) {
       updateGameSetup(
         ["players", currentPlayer, "oldestMove"],
-        moves[moves.length - 3]
+        p.moves[p.moves.length - 3]
       );
     }
-  }, [gameSetup]);
+  }, [gameSetup, currentPlayer, updateGameSetup]);
 
+  /** --------------------------------------------------
+   *  Handle inserting a symbol into the board
+   *  -------------------------------------------------- */
   function addSymbol(position) {
     updateGameSetup("MAKE_MOVE", { position });
   }
 
+  /** --------------------------------------------------
+   *  RENDER GRID
+   *  -------------------------------------------------- */
   return (
-    <div
-      className="grid grid-cols-3 grid-rows-3 size-72 sm:size-80 md:size-96"
-    >
-      {/* 
-            Using responsive size classes:
-            - size-72 (288px) on small screens
-            - sm:size-80 (320px) on small-and-up
-            - md:size-96 (384px) on medium-and-up
-           */}
+    <div className="grid grid-cols-3 grid-rows-3 size-72 sm:size-80 md:size-96">
       {gameSetup.board.map((symbol, i) => {
-        // Check if this cell is marked as the "oldest" for either player.
-        // const isOldest = i === gameSetup.players[0].oldestMove || i === gameSetup.players[1].oldestMove;
-        let isOldest=false;
-     
-
-        if (i == oldestMove && moves.length >= 3) {
-    
-              isOldest=true;
-  
-        }
-
-    
-        //  if (i == otherOldestMove &&  gameSetup.players[nextTurn].moves.length >= 3 &&  gameSetup.board[otherOldestMove]!=null) {
-        //     return (
-        //         <div key={i} className="bg-red-500">
-        //             <Cell symbol={symbol} index={i} insertSymbol={addSymbol} />
-        //         </div>
-        //     )
-        // }
+        const isOldest = i === oldestMove && moves.length >= 3;
 
         return (
-          <Cell key={i} symbol={symbol} index={i} insertSymbol={addSymbol} isOldest={isOldest}    isWinning={winningCells?.includes(i)} />
+          <Cell
+            key={i}
+            symbol={symbol}
+            index={i}
+            insertSymbol={addSymbol}
+            isOldest={isOldest}
+            isWinning={winningCells?.includes(i)}
+          />
         );
-      }
-      
-      )}
+      })}
     </div>
   );
 };
+
 export default Grid;

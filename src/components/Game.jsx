@@ -54,7 +54,7 @@ const Game = () => {
           {/* WINNER BANNER (with glow + gradient) */}
           <div
             className={clsx(
-              "text-5xl sm:text-6xl font-extrabold font-ox animate-winner-pop text-center tracking-wide",
+              "text-5xl sm:text-6xl font-extrabold font-bungee3d animate-winner-pop text-center tracking-wide",
               gameSetup.gameWinner === "draw"
                 ? "text-gradient-neutral"
                 : gameSetup.players[gameSetup.gameWinner].symbol === "X"
