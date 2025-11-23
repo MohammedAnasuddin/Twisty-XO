@@ -10,17 +10,17 @@ const ModeSelect = () => {
   };
 
   return (
-    <div className="col-span-full bg-base-300   p-4 sm:p-6 row-span-2 l3  rounded-md ">
-      <p className="text-sm sm:text-base md:text-2xl lg:text-3xl 2xl:text-4xl text-center   font-ox">
+    <div className="row-span-2 p-4 rounded-md sm:row-span-3 md:row-span-2 col-span-full bg-base-300 sm:p-8 l3 sm:mt-2">
+      <p className="text-sm text-center sm:text-base md:text-2xl lg:text-3xl 2xl:text-4xl font-ox">
         Choose Game Mode
       </p>
-      <div className=" p-4 sm:p-6 choices 2xl:p-2 flex grow gap-24 md:gap-28 justify-center items-center w-full h-full">
+      <div className="flex items-center justify-center w-full h-full gap-24 p-4 sm:p-6 choices 2xl:p-2 grow md:gap-28">
         <div
           onClick={() => addMode("vsComputer")}
-          className="btn btn-circle group relative size-12 sm:size-16 md:size-20 flex items-center justify-center hover:drop-shadow-lg"
+          className="relative flex items-center justify-center btn btn-circle group size-12 sm:size-16 md:size-20 hover:drop-shadow-lg"
         >
           <svg
-            className="size-6 sm:size-8 md:size-10 transition-all duration-300 group-hover:text-primary"
+            className="transition-all duration-300 size-6 sm:size-8 md:size-10 group-hover:text-primary"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -32,10 +32,10 @@ const ModeSelect = () => {
         <div
           id="multiple"
           onClick={() => addMode("vsFriend")}
-          className="btn btn-circle group relative size-12 sm:size-16 md:size-20 flex items-center justify-center hover:drop-shadow-lg"
+          className="relative flex items-center justify-center btn btn-circle group size-12 sm:size-16 md:size-20 hover:drop-shadow-lg"
         >
           <svg
-            className="size-6 sm:size-8 md:size-10 transition-all duration-300 group-hover:text-primary"
+            className="transition-all duration-300 size-6 sm:size-8 md:size-10 group-hover:text-primary"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
