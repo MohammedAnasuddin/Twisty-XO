@@ -39,7 +39,7 @@ const GameInfo = () => {
     <div className="col-start-1 row-span-2 row-start-1 p-4 select-none sm:p-8 bg-base-200 l2 col-span-full lg:col-span-8 md:row-span-1 lg:row-span-full rounded-xl">
       {/* Title */}
       <p className="text-xl subpixel-antialiased sm:text-2xl md:text-4xl lg:text-6xl xl:text-7xl font-bungee3d">
-        Win or Witness Others Win{" "}
+        Win or Witness Other's Win{" "}
         <span className="inline text-red-700 sm:block md:inline lg:block">
           NO DRAW
         </span>

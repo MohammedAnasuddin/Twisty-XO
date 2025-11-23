@@ -232,7 +232,7 @@ body {
 }
 
 #root {
-  height: 100%; /* Make React's root div fill its parent (the body) */
+  min-height: 100%; /* Make React's root div fill its parent (the body) */
 }
 
 /* globals.css */
