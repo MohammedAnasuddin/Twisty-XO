@@ -210,7 +210,11 @@
   --noise: 0;
 }
 
-body * {
+/* Apply transitions to all elements, but disable them when the 'theme-switching' class is present on the html tag */
+.theme-switching * {
+  transition: none !important;
+}
+body *:not(.theme-switching *) {
   @apply transition-colors duration-400;
 }
 
@@ -234,8 +238,6 @@ body {
 #root {
   min-height: 100%; /* Make React's root div fill its parent (the body) */
 }
-
-
 
 /* globals.css */
 .size-grid {
@@ -358,7 +360,7 @@ body {
 /* SPRINGY HOVER POP — premium UI */
 .cell-hover-pop {
   transition: transform 180ms cubic-bezier(0.3, 1.4, 0.5, 1),
-    box-shadow 180ms ease;
+    box-shadow 180ms ease, background-color 200ms ease-out;
 }
 
 .cell-hover-pop:hover {
