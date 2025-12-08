@@ -260,6 +260,7 @@ body {
   background-position: -1px -1px, -1px -1px;
 }
 
+/*
 
       [class^="l"] {
       border: 1px solid rgba(0, 0, 0, 0.3);
@@ -293,7 +294,7 @@ body {
     }   
 
 
-    
+    */
 
 /* Hover for debugging */
 /* [class^="l"]:hover {
