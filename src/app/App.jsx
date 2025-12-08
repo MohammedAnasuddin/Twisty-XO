@@ -5,6 +5,17 @@ import Game from "../pages/game/ui/GamePage.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { GameProvider } from "../entities/game/model/GameContext.jsx";
 function App() {
+  const gifUrl = "../../public/Partnership.png"; // Replace with your GIF's Data URL
+
+  console.log(
+    "%c ",
+    `
+  background-image: url(${gifUrl});
+  padding: 100px 200px; /* Adjust padding to control image size */
+  background-size: contain;
+  background-repeat: no-repeat;
+  `
+  );
   const projectRouter = createBrowserRouter([
     {
       path: "/",

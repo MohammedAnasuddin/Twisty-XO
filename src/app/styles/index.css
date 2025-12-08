@@ -236,7 +236,7 @@ body {
 }
 
 #root {
-  min-height: 100%; /* Make React's root div fill its parent (the body) */
+  min-height: 90%; /* Make React's root div fill its parent (the body) */
 }
 
 /* globals.css */
@@ -260,7 +260,7 @@ body {
   background-position: -1px -1px, -1px -1px;
 }
 
-/*
+
       [class^="l"] {
       border: 1px solid rgba(0, 0, 0, 0.3);
       transition: all 0.2s ease-in-out;
@@ -293,7 +293,7 @@ body {
     }   
 
 
-    */
+    
 
 /* Hover for debugging */
 /* [class^="l"]:hover {

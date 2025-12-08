@@ -3,7 +3,10 @@ import PlayArea from "../../../widgets/play-area/ui/PlayArea.jsx";
 
 const GameBody = () => {
   return (
-    <div className="grid row-start-2 p-2 bg-base-200 row-span-17 md:row-span-8 col-span-16 grid-cols-subgrid grid-rows-subgrid l1 ">
+    <div
+      id="GameBody"
+      className="grid row-start-2 p-2 bg-base-200 row-span-17 md:row-span-8 col-span-16 grid-cols-subgrid grid-rows-subgrid l1 "
+    >
       <GameInfo />
       <PlayArea />
     </div>
