@@ -34,7 +34,7 @@ const Game = () => {
 
       return () => clearTimeout(timer);
     }
-  }, [gameSetup.turn, gameSetup.gameWinner]);
+  }, [gameSetup.turn, gameSetup.gameWinner, gameSetup.mode, updateGameSetup]);
 
   const winnerText =
     gameSetup.gameWinner === "draw"
@@ -44,13 +44,13 @@ const Game = () => {
       : "";
 
   return (
-    <div className="flex flex-col items-center w-full gap-4 mt-6">
+    <div className="flex flex-col items-center w-full gap-3 mt-3 sm:gap-4 sm:mt-4 lg:mt-2">
       {/* 🟦 GRID ALWAYS SHOWS */}
       <Grid />
 
       {/* 🟩 IF GAME OVER → SHOW WINNER DIALOG */}
       {gameSetup.gameWinner !== null ? (
-        <div className="flex flex-col items-center gap-4 mt-4">
+        <div className="flex flex-col items-center gap-3 pb-4 mt-2 sm:gap-4 sm:mt-3">
           {/* WINNER BANNER (with glow + gradient) */}
           <div
             className={clsx(
