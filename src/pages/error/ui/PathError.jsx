@@ -1,4 +1,3 @@
-// PathError.tsx / PathError.jsx
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
@@ -27,7 +26,6 @@ const PathError = () => {
       <div className="relative w-full max-w-md text-center">
         {/* Giant X + ghost O */}
         <div className="relative inline-block mb-8" onMouseEnter={triggerShake}>
-
           {/* Main X – error red, shake on mount + hover */}
           <span
             className={`
@@ -65,7 +63,7 @@ const PathError = () => {
         {/* Single Undo button */}
         <button
           onClick={handleUndo}
-          className="px-6 tracking-wide rounded-full shadow-lg btn btn-primary sm:px-8 font-ox shadow-primary/30"
+          className="px-5 py-2 text-base transition-all duration-200 border shadow-lg  rounded-xl font-ox bg-white/10 dark:bg-white/5 backdrop-blur-md border-white/20 dark:border-white/10 hover:bg-white/20 dark:hover:bg-white/10 hover:shadow-xl active:scale-95"
         >
           Undo move
         </button>
