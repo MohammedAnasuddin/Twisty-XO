@@ -218,7 +218,6 @@ body *:not(.theme-switching *) {
   @apply transition-colors duration-400;
 }
 
-/* In src/index.css */
 html {
   box-sizing: border-box; /* Makes width/height calculations more intuitive */
 }
