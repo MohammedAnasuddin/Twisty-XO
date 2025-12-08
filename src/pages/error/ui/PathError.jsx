@@ -68,8 +68,8 @@ const PathError = () => {
         </p>
 
         {/* Title */}
-        <h1 className="mb-3 text-2xl sm:text-3xl md:text-4xl font-bungee">
-          Wrong move.
+        <h1 className="mb-3 text-2xl text-red-700 sm:text-3xl md:text-4xl font-bungee">
+          Wrong move
         </h1>
 
         {/* Subtitle */}
