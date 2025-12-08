@@ -56,14 +56,14 @@ const PathError = () => {
         {/* Subtitle */}
         <p className="mb-6 text-sm sm:text-base md:text-lg font-ox text-base-content/80">
           You made a move that doesn't exist.
-          <br className="hidden sm:block" />
+          <br/>
           Let's undo that and get you back into the game.
         </p>
 
         {/* Single Undo button */}
         <button
           onClick={handleUndo}
-          className="px-5 py-2 text-base transition-all duration-200 border shadow-lg  rounded-xl font-ox bg-white/10 dark:bg-white/5 backdrop-blur-md border-white/20 dark:border-white/10 hover:bg-white/20 dark:hover:bg-white/10 hover:shadow-xl active:scale-95"
+          className="px-5 py-2 text-base transition-all duration-200 border shadow-lg rounded-xl font-ox bg-white/10 dark:bg-white/5 backdrop-blur-md border-white/20 dark:border-white/10 hover:bg-white/20 dark:hover:bg-white/10 hover:shadow-xl active:scale-95"
         >
           Undo move
         </button>

@@ -63,7 +63,7 @@ const GameInfo = () => {
       <p className="my-4 text-sm lg:my-6 2xl:my-10 sm:text-base md:text-2xl lg:text-3xl 2xl:text-4xl sm:my-2 md:my-5 font-ox">
         You always have <span className="font-bold text-primary">3 marks</span>{" "}
         to play with.
-        <br className="hidden sm:block lg:m-4" />
+        <br/>
         Placing a new mark removes your{" "}
         <span
           ref={triggerRef}
