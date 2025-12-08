@@ -27,7 +27,6 @@ const PathError = () => {
       <div className="relative w-full max-w-md text-center">
         {/* Giant X + ghost O */}
         <div className="relative inline-block mb-8" onMouseEnter={triggerShake}>
-       Remove 
 
           {/* Main X – error red, shake on mount + hover */}
           <span
