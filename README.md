@@ -1,4 +1,4 @@
-# Tic Tac Toe — No Draw Edition
+# Tic Tac Toe - No Draw Edition
 
 Most Tic Tac Toe games end in a draw.  
 That means the game stops being interesting long before it ends.
