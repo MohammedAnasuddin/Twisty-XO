@@ -1,5 +1,3 @@
-
-
 /**
  * This hook contains the logic for the computer's moves.
  */
@@ -53,9 +51,11 @@ const getMove = (gameSetup) => {
 
   // 4. Take one of the corners if available
   const corners = [0, 2, 6, 8];
-  const availableCorners = corners.filter(i => gameSetup.board[i] === null);
+  const availableCorners = corners.filter((i) => gameSetup.board[i] === null);
   if (availableCorners.length > 0) {
-    return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+    return availableCorners[
+      Math.floor(Math.random() * availableCorners.length)
+    ];
   }
 
   // 5. Fallback to a random move (sides)
@@ -78,9 +78,14 @@ const getMove = (gameSetup) => {
 // (This is a simplified version for the AI's internal use)
 const checkWinner = (board) => {
   const lines = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-    [0, 4, 8], [2, 4, 6]             // diagonals
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8], // rows
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8], // columns
+    [0, 4, 8],
+    [2, 4, 6], // diagonals
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
@@ -90,6 +95,5 @@ const checkWinner = (board) => {
   }
   return null;
 };
-
 
 export { getComputerMove };
