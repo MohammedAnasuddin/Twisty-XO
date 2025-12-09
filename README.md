@@ -7,22 +7,37 @@ This project explores a simple question:
 **What happens when you redesign Tic Tac Toe so that a draw is impossible?**
 
 ---
-
 ## Interface Preview
 
-Below are a few snapshots of the game experience:
+Below are snapshots of key moments in the game experience, shown in the same order a player encounters them:
 
 - Opponent selection screen  
 - Active gameplay  
-- Win animation  
-- “Wrong Move” error screen  
+- Win result  
+- Page not found screen  
 
 These screens highlight the visual style, transitions, and responsive layout used throughout the game.
 
-![Mode Select](./assets/mode-select.png)  
-![Gameplay](./assets/gameplay.png)  
-![Win Screen](./assets/win.png)  
-![Wrong Move](./assets/404.png)
+![Mode Select](./readme_assets/mode-select.png)  
+![Gameplay](./readme_assets/gameplay.png)  
+![Win Screen](./readme_assets/win.png)  
+![Wrong Move](./readme_assets/404.png)
+
+---
+
+## Responsive Layout & Light Theme
+
+The interface adapts smoothly across different screen sizes, from mobile devices to large desktop displays.
+The visual theme can also be switched between light and dark modes.
+
+The image below demonstrates:
+- A mobile-sized layout
+- A large-screen desktop layout
+- The light theme in active use
+
+![Responsive Light Theme Preview](./readme_assets/responsive-light-preview.png)
+
+
 
 ---
 
@@ -53,7 +68,7 @@ These screens highlight the visual style, transitions, and responsive layout use
 This diagram shows the full lifecycle of a single round —
 from opponent selection to win detection and reset.
 
-![Game Logic Flow](./assets/Working-of-Twisty-XO.png)
+![Game Logic Flow](./readme_assets/flow.png)
 
 At a high level, each round follows this continuous loop:
 
@@ -170,7 +185,7 @@ These skills were applied to a complete, playable system rather than isolated de
 ## Run the Project Locally
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/MohammedAnasuddin/Twisty-XO
+cd Twisty-XO
 npm install
 npm run dev
