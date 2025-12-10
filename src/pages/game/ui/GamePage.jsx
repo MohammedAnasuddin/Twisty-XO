@@ -9,6 +9,9 @@ const Game = () => {
   const { gameSetup, updateGameSetup } = useContext(GameContext);
   const [showRestart, setShowRestart] = useState(false);
 
+  // New: lock while computer is "thinking"
+  const [isComputerThinking, setIsComputerThinking] = useState(false);
+
   // Delay restart button
   useEffect(() => {
     if (gameSetup.gameWinner !== null) {
@@ -20,20 +23,41 @@ const Game = () => {
 
   // Computer AI
   useEffect(() => {
+    // Only run AI when:
+    // - mode is vsComputer
+    // - it's the computer's turn (turn === 0 in your setup)
+    // - and the game is not finished
     if (
       gameSetup.mode === "vsComputer" &&
       gameSetup.turn === 0 &&
       gameSetup.gameWinner === null
     ) {
+      setIsComputerThinking(true); // lock interactions
+
       const timer = setTimeout(() => {
-        const computerMove = getComputerMove(gameSetup);
-        if (computerMove !== null) {
-          updateGameSetup("MAKE_MOVE", { position: computerMove });
+        try {
+          const computerMove = getComputerMove(gameSetup);
+          if (computerMove !== null) {
+            updateGameSetup("MAKE_MOVE", { position: computerMove });
+          }
+        } finally {
+          // always unlock after attempting the move
+          setIsComputerThinking(false);
         }
       }, 750);
 
-      return () => clearTimeout(timer);
+      // cleanup: cancel timeout and unlock
+      return () => {
+        clearTimeout(timer);
+        setIsComputerThinking(false);
+      };
     }
+
+    // If any condition isn't met (e.g., mode changed, game ended, or turn changed),
+    // make sure we aren't left locked.
+    setIsComputerThinking(false);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameSetup.turn, gameSetup.gameWinner, gameSetup.mode, updateGameSetup]);
 
   const winnerText =
@@ -45,8 +69,9 @@ const Game = () => {
 
   return (
     <div className="flex flex-col items-center w-full gap-3 mt-3 sm:gap-4 sm:mt-4 lg:mt-2">
-      {/* 🟦 GRID ALWAYS SHOWS */}
-      <Grid />
+      {/* 🟦 GRID ALWAYS SHOWS (pass lock flag) */}
+      
+      <Grid isLocked={isComputerThinking} />
 
       {/* 🟩 IF GAME OVER → SHOW WINNER DIALOG */}
       {gameSetup.gameWinner !== null ? (
