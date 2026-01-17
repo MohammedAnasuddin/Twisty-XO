@@ -25,8 +25,10 @@ function App() {
     },
   ]);
 
+
+  // Avoid the unnecessary scroll in the Mobile view
   return (
-    <div className="w-full min-h-screen project-container bg-base-100">
+    <div className="w-full min-h-screen project-container bg-base-100 overflow-y-hidden">
       {/* <Header/> */}
       <RouterProvider router={projectRouter} />
     </div>

@@ -7,6 +7,7 @@ This project explores a simple question:
 **What happens when you redesign Tic Tac Toe so that a draw is impossible?**
 
 ---
+
 ## Interface Preview
 
 Below are snapshots of key moments in the game experience, shown in the same order a player encounters them:
@@ -31,30 +32,32 @@ The interface adapts smoothly across different screen sizes, from mobile devices
 The visual theme can also be switched between light and dark modes.
 
 The image below demonstrates:
+
 - A mobile-sized layout
 - A large-screen desktop layout
 - The light theme in active use
 
 ![Responsive Light Theme Preview](./readme_assets/responsive-light-preview.png)
 
-
-
 ---
 
 ## How the Game Works
 
 1. The player first chooses an opponent:
+   
    - Play against the computer  
    - Play against a friend  
 
 2. Each player is allowed to have **only three active marks** on the board at any time.
 
 3. When a player places a fourth mark:
+   
    - Their **oldest mark is automatically removed**
    - The new mark takes its place
 
 4. Because older moves disappear, the board is always changing.  
    This guarantees that:
+   
    - The game never gets stuck
    - A draw is impossible
    - Every move has a consequence
@@ -94,6 +97,7 @@ The entire game is driven by a single shared game state that tracks:
 Each player is limited to **three active marks**.
 
 When a fourth move is placed:
+
 - The **oldest move is removed**
 - The new move is added to the board
 
@@ -102,6 +106,7 @@ the game updates this central state first.
 The interface then automatically reflects the new state.
 
 This keeps the game:
+
 - Predictable  
 - Easy to reset  
 - Visually consistent  
@@ -142,10 +147,12 @@ the computer must continuously re-evaluate the board instead of following fixed 
 After every move, the game immediately checks all valid winning combinations.
 
 - If a valid alignment is found:
+  
   - The current player is declared the winner
   - The game stops accepting further input
 
 - If no alignment exists:
+  
   - The turn switches to the other player
   - The next move is allowed
 
@@ -189,3 +196,4 @@ git clone https://github.com/MohammedAnasuddin/Twisty-XO
 cd Twisty-XO
 npm install
 npm run dev
+```

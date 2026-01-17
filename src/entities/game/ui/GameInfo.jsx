@@ -50,7 +50,7 @@ const GameInfo = () => {
   }, [showTooltip]);
 
   return (
-    <div className="col-start-1 row-span-2 row-start-1 select-none sm:p-8 md:p-4 bg-base-200 l2 col-span-full lg:col-span-8 md:row-span-1 lg:row-span-full rounded-xl">
+    <div className="overflow-y-hidden col-start-1 row-span-2 row-start-1 select-none sm:p-8 md:p-4 bg-base-200 l2 col-span-full lg:col-span-8 md:row-span-1 lg:row-span-full rounded-xl">
       {/* Title */}
       <p className="text-xl subpixel-antialiased sm:text-2xl md:text-4xl lg:text-6xl xl:text-7xl font-bungee3d">
         Win or Witness Other&apos;s Win{" "}
@@ -63,7 +63,7 @@ const GameInfo = () => {
       <p className="my-4 text-sm lg:my-6 2xl:my-10 sm:text-base md:text-2xl lg:text-3xl 2xl:text-4xl sm:my-2 md:my-5 font-ox">
         You always have <span className="font-bold text-primary">3 marks</span>{" "}
         to play with.
-        <br/>
+        <br />
         Placing a new mark removes your{" "}
         <span
           ref={triggerRef}

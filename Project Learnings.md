@@ -399,7 +399,9 @@ What if there there is a tool which would handle cloning and make sure the state
 > 
 > > ### What if immer State has an Array and if we add an element ? Will Immer will elce the Array with element or add new element to the Array in its new state?
 > > 
-> > Immer does not perform a traditional deep "diff" after you make changes. Instead, it uses a Proxy object to track changes as they are made to a draft state. When a new element is added to an array, Immer employs a "copy-on-write" mechanism. It creates a new array with the added element, while the parts of the state that were not changed remain untouched and are structurally shared with the old state. This is highly efficient and avoids recreating the entire data structure 
+> > Immer does not perform a traditional deep "diff" after you make changes. Instead, it uses a Proxy object to track changes as they are made to a draft state. When a new element is added to an array, Immer employs a "copy-on-write" mechanism. It creates a new array with the added element, while the parts of the state that were not changed remain untouched and are structurally shared with the old state. This is highly efficient and avoids recreating the entire data structure .
+> 
+> However, there are cases, like when using methods like `filter` or `map` that *return* a new array, where you can return the new value from the producer function, and Immer will use that return value as the next state.
 > 
 > | Feature      | `useState` (`prevState`)                                                                | `useImmer` (`draft`)                                                                  |
 > | ------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
@@ -519,9 +521,6 @@ Here’s the data flow we are building, which follows this principle:
 8. **State Changes, UI Updates:** Because the state in `Context` changed, React automatically re-renders the `Component` with the new board state. The cycle is complete.
 
 By following this, your components become clean, predictable, and focused on their one job: rendering the UI and reporting events.  
-
-
-
 
 ## Setting up the Foundation Layout
 
