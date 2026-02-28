@@ -15,7 +15,7 @@ const NavBar = () => {
         <div className="flex gap-2 icons sm:gap-4">
           <label className="swap swap-rotate btn btn-ghost ">
             {/* this hidden checkbox controls the state */}
-            <input type="checkbox" className="theme-controller" value="lMode" />
+           <input type="checkbox" className="theme-controller" value="lMode" />
 
             {/* sun icon */}
 

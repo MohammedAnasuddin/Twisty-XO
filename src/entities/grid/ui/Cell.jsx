@@ -1,10 +1,14 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState,memo} from "react";
 import clsx from "clsx";
-import { GameContext } from "../../game/model/GameContext.jsx";
 
-const Cell = ({ symbol, insertSymbol, index, isOldest, isWinning }) => {
-  const { gameSetup } = useContext(GameContext);
-
+const Cell = ({
+  symbol,
+  insertSymbol,
+  index,
+  isOldest,
+  isWinning,
+  winningColor,
+}) => {
   const [hoverReady, setHoverReady] = useState(true);
   const [shouldPop, setShouldPop] = useState(false);
 
@@ -30,17 +34,7 @@ const Cell = ({ symbol, insertSymbol, index, isOldest, isWinning }) => {
 
   // 🟩 WINNING COLOR VARIABLE
   const winStyle =
-    isWinning && gameSetup.winningColor
-      ? { "--win-color": gameSetup.winningColor }
-      : {};
-
-  // 🟨 STEADY GLOW (AFTER SWEEP)
-  useEffect(() => {
-    if (isWinning) {
-      const t = setTimeout(() => {}, 900);
-      return () => clearTimeout(t);
-    }
-  }, [isWinning]);
+    isWinning && winningColor ? { "--win-color": winningColor } : {};
 
   return (
     <div
@@ -49,35 +43,29 @@ const Cell = ({ symbol, insertSymbol, index, isOldest, isWinning }) => {
       className={clsx(
         "m-2 bg-base-300 flex items-center justify-center font-bold text-5xl md:text-7xl select-none",
 
-        // 🥇 WINNING ANIMATIONS
         isWinning && "animate-sweep-glow animate-steady-glow",
 
-        // 🔹 EMPTY CELL HOVER (springy premium UX)
         !isWinning && !isFilled && "cell-hover-pop",
 
-        // 🔸 SHAKE FOR NORMAL FILLED CELLS
         !isWinning &&
           !isOldest &&
           isFilled &&
           hoverReady &&
-          "hover:animate-shake"
+          "hover:animate-shake",
       )}
     >
       <p
         className={clsx(
           "font-ox",
 
-          // 🎉 POP-IN ON SYMBOL ADD
           shouldPop && "animate-symbol-pop",
 
-          // 🔸 OLDEST MOVE PULSE (if not winning)
           !shouldPop && !isWinning && isOldest && "animate-pulsate",
 
-          // 🎨 COLORING
           symbol === "X" &&
             "text-[oklch(55%_0.22_275)] dark:text-[oklch(78%_0.22_275)]",
           symbol === "O" &&
-            "text-[oklch(72%_0.18_85)] dark:text-[oklch(80%_0.20_90)]"
+            "text-[oklch(72%_0.18_85)] dark:text-[oklch(80%_0.20_90)]",
         )}
       >
         {symbol ?? ""}
@@ -86,4 +74,4 @@ const Cell = ({ symbol, insertSymbol, index, isOldest, isWinning }) => {
   );
 };
 
-export default Cell;
+export default memo(Cell);

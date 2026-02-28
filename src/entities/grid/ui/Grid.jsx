@@ -1,21 +1,22 @@
 import Cell from "./Cell";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useCallback } from "react";
 import { GameContext } from "../../game/model/GameContext.jsx";
 
 const Grid = ({ isLocked = false }) => {
   const { gameSetup, updateGameSetup } = useContext(GameContext);
-  const { winningCells } = gameSetup;
+  const { winningCells, winningColor } = gameSetup;
 
-  const currentPlayer = Number.isInteger(gameSetup.turn) ? gameSetup.turn : 0;
+  const currentPlayer = Number.isInteger(gameSetup.turn)
+    ? gameSetup.turn
+    : 0;
 
   const playerObj = gameSetup.players?.[currentPlayer];
   const moves = playerObj?.moves ?? [];
   const oldestMove = playerObj?.oldestMove ?? null;
 
   const nextTurn = currentPlayer === 1 ? 0 : 1;
-  // Needed if you ever show other player animations
-  const otherOldestMove = gameSetup.players?.[nextTurn]?.oldestMove ?? null;
 
+  // 🔥 FIXED EFFECT (avoid full gameSetup dependency)
   useEffect(() => {
     const p = gameSetup.players?.[currentPlayer];
     if (!p) return;
@@ -26,18 +27,20 @@ const Grid = ({ isLocked = false }) => {
         p.moves[p.moves.length - 3]
       );
     }
-  }, [gameSetup, currentPlayer, updateGameSetup]);
+  }, [currentPlayer, gameSetup.players, updateGameSetup]);
 
   /** --------------------------------------------------
-   *  Handle inserting a symbol into the board
+   *  Memoized addSymbol
    *  -------------------------------------------------- */
-  function addSymbol(position) {
-    // 🔒 Block clicks while computer is thinking or game is over
-    if (isLocked) return;
-    if (gameSetup.gameWinner !== null) return;
+  const addSymbol = useCallback(
+    (position) => {
+      if (isLocked) return;
+      if (gameSetup.gameWinner !== null) return;
 
-    updateGameSetup("MAKE_MOVE", { position });
-  }
+      updateGameSetup("MAKE_MOVE", { position });
+    },
+    [isLocked, gameSetup.gameWinner, updateGameSetup]
+  );
 
   /** --------------------------------------------------
    *  RENDER GRID
@@ -60,6 +63,7 @@ const Grid = ({ isLocked = false }) => {
             insertSymbol={addSymbol}
             isOldest={isOldest}
             isWinning={winningCells?.includes(i)}
+            winningColor={winningColor}
           />
         );
       })}
